@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import echarts from "echarts";
 import installTheme from "../theme";
 
 installTheme({}, echarts);
@@ -21,11 +20,7 @@ export default {
 
     init(myChart);
 
-    _this.$store.commit("charts/reset", [myChart]);
-
-    window.onresize = function() {
-      _this.$store.commit("charts/resize");
-    };
+    _this.$store.commit("charts/push", myChart);
   }
 };
 

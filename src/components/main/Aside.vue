@@ -19,11 +19,20 @@ import typer from '../../router/typer'
 
 console.log(typer.toNavNode(main))
 
+const menu = typer.toNavNode(main)
+
 export default {
   name:'bi-aside',
   data() {
     return {
-      data: [typer.toNavNode(main)],
+      data: [{
+        label:menu.label,
+        path:'/',
+        able:true,
+        children:[]
+      },
+      ...menu.children
+      ],
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -65,7 +74,7 @@ export default {
   background-color: rgba(0,0,0,0)!important;
 }
 
-.aside .el-tree > .el-tree-node.is-current > .el-tree-node__content::before,
+/* .aside .el-tree > .el-tree-node.is-current > .el-tree-node__content::before, */
 .aside .el-tree > .el-tree-node.is-expanded > .el-tree-node__content::before{
   content: '';
   display: inline-block;
@@ -74,7 +83,10 @@ export default {
   background-color: aqua;
 }
 
-.aside .el-tree > .el-tree-node.is-current > .el-tree-node__content,
+.aside .el-tree .el-tree-node.is-current > .el-tree-node__content{
+  font-weight: 700;
+  color: azure;
+}
 .aside .el-tree > .el-tree-node.is-expanded > .el-tree-node__content{
   background-color: rgba(255,255,255,0.1)!important;
 }

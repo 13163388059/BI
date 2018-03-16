@@ -26,6 +26,9 @@ export default {
   components: {
     ["zg11"]: zg11,
     ["zg12"]: zg12
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

@@ -45,6 +45,9 @@ export default {
     ["cw2"]: cw2,
     ["cw3"]: cw3,
     ["cw4"]: cw4
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

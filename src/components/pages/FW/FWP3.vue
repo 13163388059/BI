@@ -36,6 +36,9 @@ export default {
     ["fw9"]: fw9,
     ["fw10"]: fw10,
     ["fw11"]: fw11
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

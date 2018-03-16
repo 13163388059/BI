@@ -45,6 +45,9 @@ export default {
     ["zc2"]: zc2,
     ["zc3"]: zc3,
     ["zc4"]: zc4
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

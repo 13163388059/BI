@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import echarts from "echarts";
 import installTheme from "../theme";
 
 installTheme({}, echarts);
@@ -21,11 +20,8 @@ export default {
 
     init(myChart);
 
-    _this.$store.commit("charts/reset", [myChart]);
+    _this.$store.commit("charts/push", myChart);
 
-    window.onresize = function() {
-      _this.$store.commit("charts/resize");
-    };
   }
 };
 
@@ -49,8 +45,6 @@ function init(myChart) {
       {
         name: "访问来源",
         type: "pie",
-        radius: "55%",
-        center: ["50%", "60%"],
         data: [{ value: 335, name: "会员" }, { value: 35, name: "困难职工" }]
       }
     ]

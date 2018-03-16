@@ -52,9 +52,6 @@ export default {
 
     _this.$store.commit('charts/reset', [myChart])
 
-    window.onresize = function() {
-      _this.$store.commit('charts/resize')
-    }
 
   }
 }

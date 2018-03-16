@@ -3,6 +3,7 @@ import CSS_RESET from './css/reset.css'
 import App from './components/main/App.vue'
 import router from './router'
 import store from './store'
+import echarts from 'echarts'
 import {
   // Pagination,
   // Dialog,
@@ -72,6 +73,8 @@ import {
   // Message,
   // Notification
 } from 'element-ui'
+
+window.echarts = echarts
 
 Vue.use(Tree)
 

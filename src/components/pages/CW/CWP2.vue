@@ -27,6 +27,9 @@ export default {
   components: {
     ["cw5"]: cw5,
     ["cw6"]: cw6
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

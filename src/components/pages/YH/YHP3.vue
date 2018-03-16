@@ -27,6 +27,9 @@ export default {
   components: {
     ["yh9"]: yh9,
     ["yh10"]: yh10
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

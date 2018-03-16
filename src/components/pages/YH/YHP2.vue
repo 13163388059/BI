@@ -45,6 +45,9 @@ export default {
     ["yh6"]: yh6,
     ["yh7"]: yh7,
     ["yh8"]: yh8
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

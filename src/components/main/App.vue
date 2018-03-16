@@ -8,7 +8,9 @@
       <div :class = ' {"body--hide_aside":!isSideShow,"body--show_aside":isSideShow}'>
         <bi-aside class = 'aside'></bi-aside>
         <div class = 'page_container' style="padding:8px">
+          <transition name="fade">
           <router-view style="height:100%;width:100%;position:relative" />
+          </transition>
         </div>
       </div>
 
@@ -42,6 +44,11 @@ export default {
     },
     switchMenu(){
       this.$data.isMenuShow = !this.$data.isMenuShow
+    }
+  },
+  mounted(){
+    window.onresize = () => {
+      this.$store.commit('charts/resize')
     }
   }
 }

@@ -35,6 +35,9 @@ export default {
     ["zg5"]: zg5,
     ["zg6"]: zg6,
     ["zg7"]: zg7
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

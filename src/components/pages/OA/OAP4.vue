@@ -36,6 +36,9 @@ export default {
     ["oa2"]: oa2,
     ["oa12"]: oa12,
     ["oa14"]: oa14
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

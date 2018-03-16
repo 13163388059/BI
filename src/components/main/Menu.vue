@@ -20,7 +20,7 @@ export default {
   props:['isShow'],
   data() {
     return {
-      width:3,
+      width:4,
       height:5,
       titleHeight: 48,
       items: [{

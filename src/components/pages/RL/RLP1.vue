@@ -45,6 +45,9 @@ export default {
     ["rl2"]: rl2,
     ["rl3"]: rl3,
     ["rl4"]: rl4
+  },
+  beforeDestroy(){
+    this.$store.commit("charts/clean");
   }
 };
 </script>

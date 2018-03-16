@@ -1,172 +1,211 @@
 <template lang="html">
   <div class="">
-    <div style="height:100%;width:100%" id="container"></div>
+    <div style="height:100%;width:100%" ref= 'map'></div>
   </div>
 </template>
 
 <script>
 export default {
-  name:'bi-home',
-  data(){
+  name: 'bi-home',
+  data() {
     return {
 
     }
   },
-  methods:{
+  methods: {
 
   },
-  mounted(){
-    const map = new BMap.Map("container")
-    let point = new BMap.Point(116.404, 39.915)
+  mounted() {
+    loadBaiduMap()
+      .then(()=>{
+        renderMap(this.$refs.map)
+      })
 
-
-    map.setMapStyle({
-      styleJson:[
-          {
-                    "featureType": "water",
-                    "elementType": "all",
-                    "stylers": {
-                              "color": "#021019"
-                    }
-          },
-          {
-                    "featureType": "highway",
-                    "elementType": "geometry.fill",
-                    "stylers": {
-                              "color": "#000000"
-                    }
-          },
-          {
-                    "featureType": "highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": {
-                              "color": "#147a92"
-                    }
-          },
-          {
-                    "featureType": "arterial",
-                    "elementType": "geometry.fill",
-                    "stylers": {
-                              "color": "#000000"
-                    }
-          },
-          {
-                    "featureType": "arterial",
-                    "elementType": "geometry.stroke",
-                    "stylers": {
-                              "color": "#0b3d51"
-                    }
-          },
-          {
-                    "featureType": "local",
-                    "elementType": "geometry",
-                    "stylers": {
-                              "color": "#000000"
-                    }
-          },
-          {
-                    "featureType": "land",
-                    "elementType": "all",
-                    "stylers": {
-                              "color": "#08304b"
-                    }
-          },
-          {
-                    "featureType": "railway",
-                    "elementType": "geometry.fill",
-                    "stylers": {
-                              "color": "#000000"
-                    }
-          },
-          {
-                    "featureType": "railway",
-                    "elementType": "geometry.stroke",
-                    "stylers": {
-                              "color": "#08304b"
-                    }
-          },
-          {
-                    "featureType": "subway",
-                    "elementType": "geometry",
-                    "stylers": {
-                              "lightness": -70
-                    }
-          },
-          {
-                    "featureType": "building",
-                    "elementType": "geometry.fill",
-                    "stylers": {
-                              "color": "#000000"
-                    }
-          },
-          {
-                    "featureType": "all",
-                    "elementType": "labels.text.fill",
-                    "stylers": {
-                              "color": "#857f7f"
-                    }
-          },
-          {
-                    "featureType": "all",
-                    "elementType": "labels.text.stroke",
-                    "stylers": {
-                              "color": "#000000"
-                    }
-          },
-          {
-                    "featureType": "building",
-                    "elementType": "geometry",
-                    "stylers": {
-                              "color": "#022338"
-                    }
-          },
-          {
-                    "featureType": "green",
-                    "elementType": "geometry",
-                    "stylers": {
-                              "color": "#062032"
-                    }
-          },
-          {
-                    "featureType": "boundary",
-                    "elementType": "all",
-                    "stylers": {
-                              "color": "#1e1c1c"
-                    }
-          },
-          {
-                    "featureType": "manmade",
-                    "elementType": "geometry",
-                    "stylers": {
-                              "color": "#022338"
-                    }
-          },
-          {
-                    "featureType": "poi",
-                    "elementType": "all",
-                    "stylers": {
-                              "visibility": "off"
-                    }
-          },
-          {
-                    "featureType": "all",
-                    "elementType": "labels.icon",
-                    "stylers": {
-                              "visibility": "off"
-                    }
-          },
-          {
-                    "featureType": "land",
-                    "elementType": "all",
-                    "stylers": {
-                              "color": "#232f3bff",
-                              "visibility": "on"
-                    }
-          }
-        ]
-    })
-    map.centerAndZoom(point, 10)
+  },
+  beforeDestroy() {
+    this.$store.commit("charts/clean");
   }
+}
+
+function loadBaiduMap() {
+  if (document.getElementById('baiduMapApi')) {
+     return new Promise((res, rej)=>{ res() })
+  }
+
+  const baiduMap = document.createElement('script')
+  baiduMap.id = 'baiduMapApi'
+  baiduMap.src = "http://api.map.baidu.com/getscript?v=2.0&ak=QBlDySuCDr4IfxS2BWcQ3hdXyIQQvBqj&services=&t=20180201111639"
+
+  document.getElementsByTagName('head')[0].appendChild(baiduMap)
+
+  return new Promise((res, rej) => {
+    baiduMap.onload = baiduMap.onreadystatechange = function () {
+
+      if (!this.readyState     //这是FF的判断语句，因为ff下没有readyState这人值，IE的readyState肯定有值
+
+        || this.readyState == 'loaded' || this.readyState == 'complete'   // 这是IE的判断语句
+
+      ) {
+
+        res()
+
+      }
+
+    };
+  })
+}
+
+function renderMap(dom) {
+  const map = new BMap.Map(dom)
+  let point = new BMap.Point(116.404, 39.915)
+
+
+  map.setMapStyle({
+    styleJson: [
+      {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": {
+          "color": "#021019"
+        }
+      },
+      {
+        "featureType": "highway",
+        "elementType": "geometry.fill",
+        "stylers": {
+          "color": "#000000"
+        }
+      },
+      {
+        "featureType": "highway",
+        "elementType": "geometry.stroke",
+        "stylers": {
+          "color": "#147a92"
+        }
+      },
+      {
+        "featureType": "arterial",
+        "elementType": "geometry.fill",
+        "stylers": {
+          "color": "#000000"
+        }
+      },
+      {
+        "featureType": "arterial",
+        "elementType": "geometry.stroke",
+        "stylers": {
+          "color": "#0b3d51"
+        }
+      },
+      {
+        "featureType": "local",
+        "elementType": "geometry",
+        "stylers": {
+          "color": "#000000"
+        }
+      },
+      {
+        "featureType": "land",
+        "elementType": "all",
+        "stylers": {
+          "color": "#08304b"
+        }
+      },
+      {
+        "featureType": "railway",
+        "elementType": "geometry.fill",
+        "stylers": {
+          "color": "#000000"
+        }
+      },
+      {
+        "featureType": "railway",
+        "elementType": "geometry.stroke",
+        "stylers": {
+          "color": "#08304b"
+        }
+      },
+      {
+        "featureType": "subway",
+        "elementType": "geometry",
+        "stylers": {
+          "lightness": -70
+        }
+      },
+      {
+        "featureType": "building",
+        "elementType": "geometry.fill",
+        "stylers": {
+          "color": "#000000"
+        }
+      },
+      {
+        "featureType": "all",
+        "elementType": "labels.text.fill",
+        "stylers": {
+          "color": "#857f7f"
+        }
+      },
+      {
+        "featureType": "all",
+        "elementType": "labels.text.stroke",
+        "stylers": {
+          "color": "#000000"
+        }
+      },
+      {
+        "featureType": "building",
+        "elementType": "geometry",
+        "stylers": {
+          "color": "#022338"
+        }
+      },
+      {
+        "featureType": "green",
+        "elementType": "geometry",
+        "stylers": {
+          "color": "#062032"
+        }
+      },
+      {
+        "featureType": "boundary",
+        "elementType": "all",
+        "stylers": {
+          "color": "#1e1c1c"
+        }
+      },
+      {
+        "featureType": "manmade",
+        "elementType": "geometry",
+        "stylers": {
+          "color": "#022338"
+        }
+      },
+      {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": {
+          "visibility": "off"
+        }
+      },
+      {
+        "featureType": "all",
+        "elementType": "labels.icon",
+        "stylers": {
+          "visibility": "off"
+        }
+      },
+      {
+        "featureType": "land",
+        "elementType": "all",
+        "stylers": {
+          "color": "#232f3bff",
+          "visibility": "on"
+        }
+      }
+    ]
+  })
+  map.centerAndZoom(point, 10)
 }
 </script>
 
