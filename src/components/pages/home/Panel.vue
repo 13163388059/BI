@@ -14,13 +14,13 @@
         <div class="detail_panel--camera_title">标题</div>
         <div class="detail_panel--camera_content">
           <div>
-            <div style="background-color:red"></div>
+            <div style="background-color:aqua"></div>
           </div>
           <div>
-            <div style="background-color:red"></div>
+            <div style="background-color:aqua"></div>
           </div>
           <div>
-            <div style="background-color:red"></div>
+            <div style="background-color:aqua"></div>
           </div>
           <div>
             <div style="background-color:red"></div>
@@ -31,7 +31,7 @@
       <div class="detail_panel--camera__main">
         <div class="detail_panel--camera_title">标题</div>
         <div class="detail_panel--camera_content">
-          <div style="background-color:red;"></div>
+          <div style="background-color:aqua;"></div>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@ export default {
       `,
       states: {
         all: ['defult', 'focus_main', 'focus_small'],
-        now: 'focus_small'
+        now: 'defult'
       }
     }
   },
