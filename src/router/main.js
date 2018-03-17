@@ -10,7 +10,8 @@ import ZCMod from './ZC/index'
 
 export default {
   name: '',
-  component:() => import('../components/pages/Home.vue'),
+  component: () =>
+    import ('../components/pages/home/Home.vue'),
   title: '主页',
   children: [
     OAMod,
