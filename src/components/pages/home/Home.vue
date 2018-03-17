@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="main">
-    <bi-panel />
+    <bi-panel :isShow="showPanel"/>
     <div style="height:100%;width:100%" ref= 'map'></div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-
+      showPanel:true,
     }
   },
   methods: {

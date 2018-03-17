@@ -1,55 +1,72 @@
 <template lang="html">
-  <div v-if='isShow' class="detail_panel">
+  <div :class="'detail_panel--container ' + computed_state">
+    <div v-if='isShow' :class="'detail_panel ' + computed_state">
 
-    <div class="detail_panel--header">
-      {{title}}
-      <div class="detail_panel--close_btn el-icon-error" @click='close'></div>
-    </div>
-    <div class="detail_panel--info">
-      {{info}}
-    </div>
-
-    <div class="detail_panel--camera__small">
-      <div class="detail_panel--camera_title">标题</div>
-      <div class="detail_panel--camera_content">
-        <div style="background-color:red;width:117px;height:65px;margin:4px 4px 4px 0;float:left"></div>
-        <div style="background-color:red;width:117px;height:65px;margin:4px 4px 4px 0;float:left"></div>
-        <div style="background-color:red;width:117px;height:65px;margin:4px 4px 4px 0;float:left"></div>
-        <div style="background-color:red;width:117px;height:65px;margin:4px 0 4px 0;float:left"></div>
+      <div class="detail_panel--header">
+        {{title}}
+        <div class="detail_panel--close_btn el-icon-error" @click='close'></div>
+      </div>
+      <div class="detail_panel--info">
+        {{info}}
       </div>
 
-    </div>
-    <div class="detail_panel--camera__main">
-      <div class="detail_panel--camera_title">标题</div>
-      <div class="detail_panel--camera_content">
-        <div style="background-color:red;width:480px;height:270px;"></div>
+      <div class="detail_panel--camera__small">
+        <div class="detail_panel--camera_title">标题</div>
+        <div class="detail_panel--camera_content">
+          <div>
+            <div style="background-color:red"></div>
+          </div>
+          <div>
+            <div style="background-color:red"></div>
+          </div>
+          <div>
+            <div style="background-color:red"></div>
+          </div>
+          <div>
+            <div style="background-color:red"></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="detail_panel--camera__main">
+        <div class="detail_panel--camera_title">标题</div>
+        <div class="detail_panel--camera_content">
+          <div style="background-color:red;"></div>
+        </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
 <script>
 export default {
   name: 'bi-panel',
-
+  props: ['isShow'],
   data() {
     return {
-      title:'管理所名字',
-      isShow:true,
-      info:`WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。
+      title: '管理所名字',
+      info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。
 
       如果你正在阅读本文，很可能你已经对WASM有一定的了解。如果你不了解，那么你可以好好看看 webassembly.org。就在本文发布的时候，WebAssembly 刚刚达成了 浏览器预览里程碑，这意味着WebAssembly版本1很可能和当前草案所描述的一致。本文的细节基于版本mvp-13。
 
       WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。
 
       如果你正在阅读本文，很可能你已经对WASM有一定的了解。如果你不了解，那么你可以好好看看 webassembly.org。就在本文发布的时候，WebAssembly 刚刚达成了 浏览器预览里程碑，这意味着WebAssembly版本1很可能和当前草案所描述的一致。本文的细节基于版本mvp-13。
-      `
+      `,
+      states: {
+        all: ['defult', 'focus_main', 'focus_small'],
+        now: 'focus_small'
+      }
+    }
+  },
+  computed: {
+    computed_state() {
+      return this.states.all.reduce(
+        (res, val) => (val == this.states.now ? this.states.now : res), 'defult')
     }
   },
   methods: {
-    close(){
+    close() {
       this.emit('close')
     }
   }
@@ -57,65 +74,213 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+// $background: linear-gradient(to right, #242e3a, #242e3a); // 背景色
+$background: #262d35;
+$font_color: #fff;
 
-.detail_panel {
+$head_height: 48px;
+$head_font_size: 20px;
+
+$title_height: 48px;
+$head_font_size: 16px;
+
+$space: 4px;
+$outer_space: 16px;
+
+$main_video_height: 270px;
+$main_video_width: 480px;
+$small_video_height: 87px;
+$small_video_width: 117px;
+
+.detail_panel--container {
     position: absolute;
-    /* background: linear-gradient(to right, #242e3a, #242e3a); */
-    background: linear-gradient(to right, #242e3a, #242e3a);
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
-    right: 8px;
-    top: 8px;
-    bottom: 8px;
-    max-height: 720px;
-    width: 488px;
-    z-index: 1;
-    padding: 4px;
-}
+    top: $outer_space;
+    right: $outer_space;
+    height: 100%;
+    max-height: 600px;
+    width: $main_video_width+2*$space;
+    transition: all 0.3s ease-out;
 
-.detail_panel--header{
-    height: 48px;font-size: 20px;font-weight: bold; color: #fff;
-    line-height: 48px;
-    text-align: left;
-    padding-left: 4px
-}
-.detail_panel--camera__main{
-  position: absolute;
-  bottom: 4px;
-  height: 318px;
-  left: 4px;right: 4px;
-}
+    * {
+        transition: all 0.3s ease-out;
+    }
 
-.detail_panel--camera_title{
-  height: 48px;line-height: 48px;
-  font-size: 16px;
-  text-align: left;
-  color: #fff;
-  padding-left: 4px
-}
+    &.focus_main {
+        width: 100%;
+        max-height: 100%;
+        top: 0;
+        right: 0;
 
-.detail_panel--camera__small{
-    position: absolute;
-    bottom: 326px;
-    height: 121px;
-    left: 4px;right: 4px;
-}
+        .detail_panel {
+            top: $outer_space;
+            bottom: $outer_space;
+            left: $outer_space;
+            right: $outer_space;
+            padding: $space;
 
-.detail_panel--info{
-    position: absolute;
-    top:52px;
-    padding:  0 16px;
-    bottom:451px;
-    overflow: auto;
-}
+            .detail_panel--header,
+            .detail_panel--camera__small,
+            .detail_panel--info {
+                opacity: 0;
+            }
 
-.detail_panel--close_btn{
-  position: absolute;
-  right: 18px;
-  top: 18px;
-}
+            .detail_panel--camera__main {
+                bottom: $space;
+                height: 100%;
+                padding: {
+                    top: $title_height+$space;
+                }
 
-.detail_panel--close_btn:hover{
-  color: rgba(255, 255, 255, 0.7);
+                .detail_panel--camera_title {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: $space;
+                }
+
+                .detail_panel--camera_content,
+                .detail_panel--camera_content > div {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    &.focus_small {
+        width: 100%;
+        max-height: 100%;
+        top: 0;
+        right: 0;
+
+        .detail_panel{
+            top: $outer_space;
+            bottom: $outer_space;
+            left: $outer_space;
+            right: $outer_space;
+            padding: $space;
+
+            .detail_panel--header,
+            .detail_panel--camera__main,
+            .detail_panel--info {
+                opacity: 0;
+            }
+            .detail_panel--camera__small {
+                bottom: $space;
+                top: 0;
+                height: 100%;
+                padding: {
+                    top: $title_height+$space;
+                    bottom: $space;
+                }
+                .detail_panel--camera_title {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: $space;
+                }
+                .detail_panel--camera_content {
+                    width: 100%;
+                    height: 100%;
+                }
+                .detail_panel--camera_content > div {
+                    width: 50%;
+                    height: 50%;
+                    margin: 0 !important;
+                    padding: $space;
+                }
+            }
+        }
+        
+    }
+
+    .detail_panel {
+        position: absolute;
+        background: $background;
+        box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
+        right: 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        padding: $space;
+
+        .detail_panel--header {
+            height: $head_height;
+            font-size: 20px;
+            font-weight: bold;
+            color: $font_color;
+            line-height: $head_height;
+            text-align: left;
+            padding-left: 2px;
+
+            .detail_panel--close_btn {
+                position: absolute;
+                right: 18px;
+                top: 18px;
+            }
+
+            .detail_panel--close_btn:hover {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+        .detail_panel--camera__main {
+            position: absolute;
+            bottom: $space;
+            height: $main_video_height+$title_height;
+            left: $space;
+            right: $space;
+
+            .detail_panel--camera_content div {
+                height: $main_video_height;
+                width: $main_video_width;
+            }
+        }
+
+        .detail_panel--camera__small {
+            position: absolute;
+            bottom: $main_video_height+$title_height;
+            height: $small_video_height+$title_height+2*$space;
+            left: $space;
+            right: $space;
+
+            .detail_panel--camera_content > div {
+                height: $small_video_height;
+                width: $small_video_width;
+                float: left;
+                margin: $space $space $space 0;
+
+                &:last-child {
+                    margin: $space 0 $space 0;
+                }
+                div {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        .detail_panel--camera_title {
+            height: $title_height;
+            line-height: $title_height;
+            font-size: $head_font_size;
+            text-align: left;
+            color: $font_color;
+            padding-left: 2px;
+        }
+
+        .detail_panel--info {
+            position: absolute;
+            top: $head_height+$space;
+            padding: 0 4px;
+            bottom: $main_video_height+$small_video_height+2*(
+                    $space+$title_height
+                );
+            overflow: auto;
+            color: $font_color;
+        }
+        
+    }
 }
 </style>
