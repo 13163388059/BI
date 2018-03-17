@@ -1,5 +1,5 @@
 <template lang="html">
-	<div class="mask_menu"  ref='mask' :style="{opacity: isShow?1:0,transitionDelay:isShow?'0.1s':'0s'}">
+	<div class="mask_menu" ref='mask' :style="{opacity: isShow?1:0,transitionDelay:isShow?'0.1s':'0s'}">
 		<div class="mask_menu__container" ref="menu">
 			<div v-for='(item,index) in items' class="mask_menu__item" :style="{width:120*width+'px',height:120*height+'px'}">
 				<div class="mask_menu__title" :style='{height:titleHeight+"px",lineHeight:titleHeight+"px",top:-1*titleHeight+"px"}'>{{index}}</div>
@@ -124,6 +124,7 @@
 		},
 		methods: {
 			test(test) {
+				console.log(test)
 				this.scrollObj(test.deltaY)
 			}
 		},
@@ -132,19 +133,23 @@
 
 			addMouseWheelEvent(
 				this.$refs.menu,
-				() => {
-					this.scrollObj(this.$refs.menu.deltaY)
-				}
+				(event) => {
+					this.scrollObj(event.deltaY)
+				},
+				(event) => {
+					this.scrollObj(event.detail)
+				},
 			)
 		}
 	}
-	function addMouseWheelEvent(element, func) {
+	function addMouseWheelEvent(element, func1,func2) {
 
 
-		if (element.onmousewheel) 
-			element.onmousewheel = func
+		console.log(element.onmousewheel)
+		if (element.onmousewheel === null) 
+			element.onmousewheel = func1
 		else
-			element.addEventListener("DOMMouseScroll", func, false)
+			element.addEventListener("DOMMouseScroll", func2, false)
 		
 	}
 
