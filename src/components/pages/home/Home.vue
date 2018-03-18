@@ -22,10 +22,12 @@ export default {
 
   },
   mounted() {
-    loadBaiduMap()
-      .then(() => {
-        renderMap(this.$refs.map)
-      })
+
+	if(document.getElementById('baiduMapApi')) 
+		renderMap(this.$refs.map)
+	else
+		loadBaiduMap(this.$refs.map)
+
 
   },
   beforeDestroy() {
@@ -33,31 +35,24 @@ export default {
   }
 }
 
-function loadBaiduMap() {
-  if (document.getElementById('baiduMapApi')) {
-    return new Promise((res, rej) => {
-      res()
-    })
-  }
+function loadBaiduMap(dom) {
   const baiduMap = document.createElement('script')
   baiduMap.id = 'baiduMapApi'
-  baiduMap.src = "https://api.map.baidu.com/getscript?v=2.0&ak=QBlDySuCDr4IfxS2BWcQ3hdXyIQQvBqj&services=&t=20180201111639"
+  baiduMap.src = "https://api.map.baidu.com/api?v=2.0&ak=QBlDySuCDr4IfxS2BWcQ3hdXyIQQvBqj&s=1&callback=initMap"
 
   document.getElementsByTagName('head')[0].appendChild(baiduMap)
-  return new Promise((res, rej) => {
-    baiduMap.onload = baiduMap.onreadystatechange = function() {
-      if (!this.readyState //这是FF的判断语句，因为ff下没有readyState这人值，IE的readyState肯定有值
-        ||this.readyState == 'loaded'
-        || this.readyState == 'complete' // 这是IE的判断语句
-      )  res()
-    };
-  })
+
+  window.initMap = function(){
+
+		renderMap(dom)
+  }
 }
 
 function renderMap(dom) {
   const map = new BMap.Map(dom)
   let point = new BMap.Point(116.404, 39.915)
 
+	console.log(dom)
   map.setMapStyle({
     styleJson: [{
         "featureType": "water",
