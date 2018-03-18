@@ -41,7 +41,7 @@ function loadBaiduMap() {
   }
   const baiduMap = document.createElement('script')
   baiduMap.id = 'baiduMapApi'
-  baiduMap.src = "https://api.map.baidu.com/getscript?v=2.0&ak=QBlDySuCDr4IfxS2BWcQ3hdXyIQQvBqj&services=&t=20180201111639&s=1"
+  baiduMap.src = "https://api.map.baidu.com/getscript?v=2.0&ak=QBlDySuCDr4IfxS2BWcQ3hdXyIQQvBqj&services=&t=20180201111639"
 
   document.getElementsByTagName('head')[0].appendChild(baiduMap)
   return new Promise((res, rej) => {
