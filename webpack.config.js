@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: './dist/',
+    publicPath: process.env.NODE_ENV === 'production'?'./dist/':'/dist/',
     filename: 'build.js',
     chunkFilename: 'chunk/[id]_[chunkhash:8].chunk.js'
   },
@@ -72,7 +72,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
+      sourceMap: false,
       compress: {
         warnings: false
       }

@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="main">
-    <bi-panel :isShow="showPanel"/>
+    <bi-panel :isShow="showPanel" @close = 'panelClose'/>
     <div style="height:100%;width:100%" ref= 'map'></div>
   </div>
 </template>
@@ -10,23 +10,25 @@ import bi_panel from './Panel.vue'
 
 export default {
   name: 'bi-home',
-  components:{
-    ['bi-panel']:bi_panel
+  components: {
+    ['bi-panel']: bi_panel
   },
   data() {
     return {
-      showPanel:true,
+      showPanel: true,
     }
   },
   methods: {
-
+    panelClose() { 
+      this.showPanel = false
+    }
   },
   mounted() {
 
-	if(document.getElementById('baiduMapApi')) 
-		renderMap(this.$refs.map)
-	else
-		loadBaiduMap(this.$refs.map)
+    if (document.getElementById('baiduMapApi'))
+      renderMap(this.$refs.map)
+    else
+      loadBaiduMap(this.$refs.map)
 
 
   },
@@ -42,9 +44,9 @@ function loadBaiduMap(dom) {
 
   document.getElementsByTagName('head')[0].appendChild(baiduMap)
 
-  window.initMap = function(){
+  window.initMap = function () {
 
-		renderMap(dom)
+    renderMap(dom)
   }
 }
 
@@ -52,149 +54,148 @@ function renderMap(dom) {
   const map = new BMap.Map(dom)
   let point = new BMap.Point(116.404, 39.915)
 
-	console.log(dom)
   map.setMapStyle({
     styleJson: [{
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": {
-          "color": "#021019"
-        }
-      },
-      {
-        "featureType": "highway",
-        "elementType": "geometry.fill",
-        "stylers": {
-          "color": "#000000"
-        }
-      },
-      {
-        "featureType": "highway",
-        "elementType": "geometry.stroke",
-        "stylers": {
-          "color": "#147a92"
-        }
-      },
-      {
-        "featureType": "arterial",
-        "elementType": "geometry.fill",
-        "stylers": {
-          "color": "#000000"
-        }
-      },
-      {
-        "featureType": "arterial",
-        "elementType": "geometry.stroke",
-        "stylers": {
-          "color": "#0b3d51"
-        }
-      },
-      {
-        "featureType": "local",
-        "elementType": "geometry",
-        "stylers": {
-          "color": "#000000"
-        }
-      },
-      {
-        "featureType": "land",
-        "elementType": "all",
-        "stylers": {
-          "color": "#08304b"
-        }
-      },
-      {
-        "featureType": "railway",
-        "elementType": "geometry.fill",
-        "stylers": {
-          "color": "#000000"
-        }
-      },
-      {
-        "featureType": "railway",
-        "elementType": "geometry.stroke",
-        "stylers": {
-          "color": "#08304b"
-        }
-      },
-      {
-        "featureType": "subway",
-        "elementType": "geometry",
-        "stylers": {
-          "lightness": -70
-        }
-      },
-      {
-        "featureType": "building",
-        "elementType": "geometry.fill",
-        "stylers": {
-          "color": "#000000"
-        }
-      },
-      {
-        "featureType": "all",
-        "elementType": "labels.text.fill",
-        "stylers": {
-          "color": "#857f7f"
-        }
-      },
-      {
-        "featureType": "all",
-        "elementType": "labels.text.stroke",
-        "stylers": {
-          "color": "#000000"
-        }
-      },
-      {
-        "featureType": "building",
-        "elementType": "geometry",
-        "stylers": {
-          "color": "#022338"
-        }
-      },
-      {
-        "featureType": "green",
-        "elementType": "geometry",
-        "stylers": {
-          "color": "#062032"
-        }
-      },
-      {
-        "featureType": "boundary",
-        "elementType": "all",
-        "stylers": {
-          "color": "#1e1c1c"
-        }
-      },
-      {
-        "featureType": "manmade",
-        "elementType": "geometry",
-        "stylers": {
-          "color": "#022338"
-        }
-      },
-      {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": {
-          "visibility": "off"
-        }
-      },
-      {
-        "featureType": "all",
-        "elementType": "labels.icon",
-        "stylers": {
-          "visibility": "off"
-        }
-      },
-      {
-        "featureType": "land",
-        "elementType": "all",
-        "stylers": {
-          "color": "#232f3bff",
-          "visibility": "on"
-        }
+      "featureType": "water",
+      "elementType": "all",
+      "stylers": {
+        "color": "#021019"
       }
+    },
+    {
+      "featureType": "highway",
+      "elementType": "geometry.fill",
+      "stylers": {
+        "color": "#000000"
+      }
+    },
+    {
+      "featureType": "highway",
+      "elementType": "geometry.stroke",
+      "stylers": {
+        "color": "#147a92"
+      }
+    },
+    {
+      "featureType": "arterial",
+      "elementType": "geometry.fill",
+      "stylers": {
+        "color": "#000000"
+      }
+    },
+    {
+      "featureType": "arterial",
+      "elementType": "geometry.stroke",
+      "stylers": {
+        "color": "#0b3d51"
+      }
+    },
+    {
+      "featureType": "local",
+      "elementType": "geometry",
+      "stylers": {
+        "color": "#000000"
+      }
+    },
+    {
+      "featureType": "land",
+      "elementType": "all",
+      "stylers": {
+        "color": "#08304b"
+      }
+    },
+    {
+      "featureType": "railway",
+      "elementType": "geometry.fill",
+      "stylers": {
+        "color": "#000000"
+      }
+    },
+    {
+      "featureType": "railway",
+      "elementType": "geometry.stroke",
+      "stylers": {
+        "color": "#08304b"
+      }
+    },
+    {
+      "featureType": "subway",
+      "elementType": "geometry",
+      "stylers": {
+        "lightness": -70
+      }
+    },
+    {
+      "featureType": "building",
+      "elementType": "geometry.fill",
+      "stylers": {
+        "color": "#000000"
+      }
+    },
+    {
+      "featureType": "all",
+      "elementType": "labels.text.fill",
+      "stylers": {
+        "color": "#857f7f"
+      }
+    },
+    {
+      "featureType": "all",
+      "elementType": "labels.text.stroke",
+      "stylers": {
+        "color": "#000000"
+      }
+    },
+    {
+      "featureType": "building",
+      "elementType": "geometry",
+      "stylers": {
+        "color": "#022338"
+      }
+    },
+    {
+      "featureType": "green",
+      "elementType": "geometry",
+      "stylers": {
+        "color": "#062032"
+      }
+    },
+    {
+      "featureType": "boundary",
+      "elementType": "all",
+      "stylers": {
+        "color": "#1e1c1c"
+      }
+    },
+    {
+      "featureType": "manmade",
+      "elementType": "geometry",
+      "stylers": {
+        "color": "#022338"
+      }
+    },
+    {
+      "featureType": "poi",
+      "elementType": "all",
+      "stylers": {
+        "visibility": "off"
+      }
+    },
+    {
+      "featureType": "all",
+      "elementType": "labels.icon",
+      "stylers": {
+        "visibility": "off"
+      }
+    },
+    {
+      "featureType": "land",
+      "elementType": "all",
+      "stylers": {
+        "color": "#232f3bff",
+        "visibility": "on"
+      }
+    }
     ]
   })
   map.centerAndZoom(point, 10)
@@ -207,5 +208,4 @@ function renderMap(dom) {
     width: 100%;
     height: 100%;
 }
-
 </style>
