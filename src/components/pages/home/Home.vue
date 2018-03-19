@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="main">
+    <bi-bar />
     <bi-panel :isShow="showPanel" @close = 'panelClose'/>
     <div style="height:100%;width:100%" ref= 'map'></div>
   </div>
@@ -7,11 +8,13 @@
 
 <script>
 import bi_panel from './Panel.vue'
+import bi_bar from './Bar.vue'
 
 export default {
   name: 'bi-home',
   components: {
-    ['bi-panel']: bi_panel
+    ['bi-panel']: bi_panel,
+    ['bi-bar']: bi_bar
   },
   data() {
     return {
