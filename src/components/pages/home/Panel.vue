@@ -1,7 +1,6 @@
 <template lang="html">
   <div :class="'detail_panel--container ' + computed_state">
     <div v-if='isShow' :class="'detail_panel ' + computed_state">
-
       <div class="detail_panel--header">
         {{title}}
         <div class="detail_panel--close_btn el-icon-error" @click='close'></div>
@@ -9,9 +8,8 @@
       <div class="detail_panel--info">
         {{info}}
       </div>
-
-      <div class="detail_panel--camera__small">
-        <div class="detail_panel--camera_title">标题</div>
+      <div class="detail_panel--camera__small" @click = 'focusSmall'>
+        <div class="detail_panel--camera_title">监控</div>
         <div class="detail_panel--camera_content">
           <div>
             <div style="background-color:aqua"></div>
@@ -28,8 +26,8 @@
         </div>
 
       </div>
-      <div class="detail_panel--camera__main">
-        <div class="detail_panel--camera_title">标题</div>
+      <div class="detail_panel--camera__main" @click = 'focusMain'>
+        <div class="detail_panel--camera_title">实景</div>
         <div class="detail_panel--camera_content">
           <div style="background-color:aqua;"></div>
         </div>
@@ -54,8 +52,14 @@ export default {
       如果你正在阅读本文，很可能你已经对WASM有一定的了解。如果你不了解，那么你可以好好看看 webassembly.org。就在本文发布的时候，WebAssembly 刚刚达成了 浏览器预览里程碑，这意味着WebAssembly版本1很可能和当前草案所描述的一致。本文的细节基于版本mvp-13。
       `,
       states: {
-        all: ['defult', 'focus_main', 'focus_small'],
-        now: 'defult'
+        all: ['default', 'focus_main', 'focus_small'],
+        now: 'default'
+      },
+
+      data:{
+          ['']:{
+              
+          }
       }
     }
   },
@@ -67,7 +71,15 @@ export default {
   },
   methods: {
     close() {
-      this.emit('close')
+      this.$emit('close')
+    },
+    focusMain(){
+        if(this.states.now !== 'focus_main') this.states.now = 'focus_main'
+        else this.states.now = 'default'
+    },
+    focusSmall(){
+        if(this.states.now !== 'focus_small') this.states.now = 'focus_small'
+        else this.states.now = 'default'
     }
   }
 
@@ -82,7 +94,7 @@ $font_color: #fff;
 $head_height: 48px;
 $head_font_size: 20px;
 
-$title_height: 48px;
+$title_height: 40px;
 $head_font_size: 16px;
 
 $space: 4px;
@@ -168,7 +180,7 @@ $small_video_width: 117px;
             }
             .detail_panel--camera__small {
                 bottom: $space;
-                top: 0;
+                bottom: 0;
                 height: 100%;
                 padding: {
                     top: $title_height+$space;
@@ -231,7 +243,7 @@ $small_video_width: 117px;
             height: $main_video_height+$title_height;
             left: $space;
             right: $space;
-
+            margin-top:2*$space;
             .detail_panel--camera_content div {
                 height: $main_video_height;
                 width: $main_video_width;
@@ -240,11 +252,11 @@ $small_video_width: 117px;
 
         .detail_panel--camera__small {
             position: absolute;
-            bottom: $main_video_height+$title_height;
+            bottom: $main_video_height+$title_height+2*$space;
             height: $small_video_height+$title_height+2*$space;
             left: $space;
             right: $space;
-
+            margin-top:2*$space;
             .detail_panel--camera_content > div {
                 height: $small_video_height;
                 width: $small_video_width;
@@ -275,7 +287,7 @@ $small_video_width: 117px;
             top: $head_height+$space;
             padding: 0 4px;
             bottom: $main_video_height+$small_video_height+2*(
-                    $space+$title_height
+                    3*$space+$title_height
                 );
             overflow: auto;
             color: $font_color;

@@ -124,13 +124,13 @@
 		},
 		methods: {
 			test(test) {
-				console.log(test)
 				this.scrollObj(test.deltaY)
 			}
 		},
 		mounted() {
 			this.scrollObj = CreacteScroll(this.$refs.menu)
 
+			//添加鼠标滚轮监听
 			addMouseWheelEvent(
 				this.$refs.menu,
 				(event) => {
@@ -142,13 +142,14 @@
 			)
 		}
 	}
+
+
 	function addMouseWheelEvent(element, func1,func2) {
 
-
-		console.log(element.onmousewheel)
 		if (element.onmousewheel === null) 
 			element.onmousewheel = func1
 		else
+			// 火狐鼠标滚动兼容
 			element.addEventListener("DOMMouseScroll", func2, false)
 		
 	}

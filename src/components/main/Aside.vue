@@ -15,10 +15,6 @@
 import main from '../../router/main'
 import typer from '../../router/typer'
 
-
-
-console.log(typer.toNavNode(main))
-
 const menu = typer.toNavNode(main)
 
 export default {

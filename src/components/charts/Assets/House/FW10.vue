@@ -1,0 +1,56 @@
+<template lang="html">
+  <div style="height:100%;width:100%" ref  = 'chart' >
+  </div>
+</template>
+
+<script>
+import installTheme from "../../theme";
+
+installTheme({}, echarts);
+
+export default {
+  name: "page-test",
+  data() {
+    return {};
+  },
+  methods: {},
+  mounted() {
+    const myChart = echarts.init(this.$refs.chart, "darkk"),
+      _this = this;
+
+    init(myChart);
+
+    _this.$store.commit("charts/push", myChart);
+  }
+};
+
+function init(myChart) {
+  const option = {
+    title: {
+      text: "新增备选项目情况",
+      subtext: "当年",
+      x: "center"
+    },
+    tooltip: {
+      trigger: "axis"
+    },
+    xAxis: {
+      type: "category",
+      data: ["2016", "2017", "2018"]
+    },
+    yAxis: {
+      type: "value"
+    },
+    series: [
+      {
+        name: "项目个数",
+        data: [210, 334, 567],
+        type: "line"
+      }
+    ]
+  };
+
+  myChart.setOption(option);
+}
+</script>
+

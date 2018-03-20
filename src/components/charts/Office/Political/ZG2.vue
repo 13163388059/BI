@@ -1,0 +1,63 @@
+<template lang="html">
+  <div style="height:100%;width:100%" ref  = 'chart' >
+  </div>
+</template>
+
+<script>
+import installTheme from "../../theme";
+
+installTheme({}, echarts);
+
+export default {
+  name: "page-test",
+  data() {
+    return {};
+  },
+  methods: {},
+  mounted() {
+    const myChart = echarts.init(this.$refs.chart, "darkk"),
+      _this = this;
+
+    init(myChart);
+
+    _this.$store.commit("charts/push", myChart);
+  }
+};
+
+function init(myChart) {
+  const option = {
+    title: {
+      text: "党委成员类别分布",
+      subtext: "当年",
+      x: "center"
+    },
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+      orient: "vertical",
+      left: "left",
+      top: "middle",
+      data: ["党员", "流动党员", "入党对象", "入党积极分子"]
+    },
+    series: [
+      {
+        name: "人数",
+        type: "pie",
+        radius: "55%",
+        center: ["50%", "60%"],
+        data: [
+          { value: 335, name: "党员" },
+          { value: 310, name: "流动党员" },
+          { value: 234, name: "入党对象" },
+          { value: 135, name: "入党积极分子" }
+        ]
+      }
+    ]
+  };
+
+  myChart.setOption(option);
+}
+</script>
+
