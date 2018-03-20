@@ -10,11 +10,12 @@ export default {
   namespaced: true,
   state: {
     all: menu.children,
-    choose:[]
+    choose:menu.children[0]
   },
   mutations: {
-    clean(state) {
-      state.all = []
+    choose(state,index) {
+      if(state.all[index])
+        state.choose = state.all[index]
     },
   }
 }
