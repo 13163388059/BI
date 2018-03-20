@@ -4,6 +4,7 @@ export default {
   children: [{
       name: '6001',
       title: '安全隐患排查',
+      width:2,
       children: [
         {
           name:'600101',
@@ -16,6 +17,7 @@ export default {
     {
       name: '6002',
       title: '作业风险',
+      width:2,
       children: [
         {
           name:'600201',

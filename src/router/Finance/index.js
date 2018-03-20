@@ -4,6 +4,7 @@ export default {
   children: [{
       name: '3001',
       title: '项目库',
+      width:2,
       children: [
         {
           name:'300101',
@@ -16,6 +17,7 @@ export default {
     {
       name: '3002',
       title: '财政预算',
+      width:2,
       children: [
         {
           name:'300201',
@@ -28,6 +30,7 @@ export default {
     {
       name: '3003',
       title: '财务报账',
+      width:2,
       children: [
         {
           name:'300301',
@@ -46,6 +49,7 @@ export default {
     {
       name: '3004',
       title: '合同支付',
+      width:2,
       children: [
         {
           name:'300401',

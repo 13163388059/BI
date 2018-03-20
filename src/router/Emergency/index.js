@@ -4,6 +4,7 @@ export default {
   children: [{
       name: '7001',
       title: 'GIS',
+      width:2,
       children: [
         {
           name:'700101',
@@ -16,6 +17,7 @@ export default {
     {
       name: '7002',
       title: '应急调度',
+      width:2,
       children: [
         {
           name:'700201',
@@ -34,6 +36,7 @@ export default {
     {
       name: '7003',
       title: '移动单兵',
+      width:2,
       children: [
         {
           name:'700301',

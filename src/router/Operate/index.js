@@ -4,6 +4,7 @@ export default {
   children: [{
       name: '5001',
       title: '路政',
+      width:2,
       children: [
         {
           name:'500101',
@@ -16,6 +17,7 @@ export default {
     {
       name: '5002',
       title: '养护',
+      width:2,
       children: [
         {
           name:'500201',
@@ -40,6 +42,7 @@ export default {
     {
       name: '5003',
       title: '营运收费',
+      width:2,
       children: [
         {
           name:'500301',
@@ -70,6 +73,7 @@ export default {
     {
       name: '5004',
       title: '服务区',
+      width:2,
       children: [
         {
           name:'500401',

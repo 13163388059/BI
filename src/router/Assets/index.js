@@ -4,6 +4,7 @@ export default {
   children: [{
       name: '4001',
       title: '办公资产',
+      width:2,
       children: [
         {
           name:'400101',
@@ -34,6 +35,7 @@ export default {
     {
       name: '4002',
       title: '机电设备',
+      width:2,
       children: [
         {
           name:'400201',
@@ -52,6 +54,7 @@ export default {
     {
       name: '4003',
       title: '路产设施',
+      width:2,
       children: [
         {
           name:'400301',

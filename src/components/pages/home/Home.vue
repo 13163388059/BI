@@ -27,7 +27,7 @@ export default {
       this.showPanel = false
     },
     panelOpen(type){
-      this.type = type
+      this.panelType = type
       this.showPanel = true
     },
     barClick(e){

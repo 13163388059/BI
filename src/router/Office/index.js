@@ -4,6 +4,7 @@ export default {
   children: [{
       name: '2001',
       title: '人力资源',
+      width:2,
       children: [
         {
           name:'200101',
@@ -16,6 +17,7 @@ export default {
     {
       name: '2002',
       title: '政工',
+      width:2,
       children: [
         {
           name:'200201',
@@ -28,6 +30,7 @@ export default {
     {
       name: '2003',
       title: '综合办公',
+      width:2,
       children: [
         {
           name:'200301',

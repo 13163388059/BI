@@ -4,6 +4,7 @@ export default {
   children: [{
       name: '8001',
       title: '系统设置',
+      width:2,
       children: [
         {
           name:'800101',

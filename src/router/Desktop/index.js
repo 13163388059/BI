@@ -1,9 +1,11 @@
 export default {
   name: '10',
   title: '我的桌面',
+  width:2,
   children: [{
       name: '1001',
       title: '首页',
+      width:2,
       children: [
         {
           name:'100101',
