@@ -27,7 +27,7 @@ export default {
 function init(myChart) {
   const option = {
     title: {
-      text: "党委培养人数排名前三",
+      text: "党委培养人数排名前5",
       subtext: "当年",
       x: "center"
     },
@@ -37,7 +37,7 @@ function init(myChart) {
     xAxis: [
       {
         type: "category",
-        data: ["李兴东", "张卉", "郭拓"]
+        data: ["张卉", "李兴东", "吴超","肖建国","郭拓"]
       }
     ],
     yAxis: [
@@ -49,7 +49,7 @@ function init(myChart) {
       {
         name: "培养人数",
         type: "bar",
-        data: [12, 9, 15],
+        data: [12, 19, 15,12,11],
         markPoint: {
           data: [
             { type: "max", name: "最大值" },

@@ -27,7 +27,7 @@ export default {
 function init(myChart) {
   const option = {
     title: {
-      text: "纪委团委工会新增人数",
+      text: "纪委团委以及困难职工新增人数",
       subtext: "每年",
       x: "center"
     },
@@ -40,7 +40,7 @@ function init(myChart) {
     },
     legend: {
       left: "left",
-      data: ["困难职工数", "会员数", "纪委", "团委"]
+      data: ["困难职工数", "纪委", "团委"]
     },
     xAxis: {
       type: "category",
@@ -56,12 +56,6 @@ function init(myChart) {
         type: "line",
         smooth: true,
         data: [0, 0, 2, 0, 1]
-      },
-      {
-        name: "会员数",
-        type: "line",
-        smooth: true,
-        data: [22, 32, 21, 11, 15]
       },
       {
         name: "纪委",

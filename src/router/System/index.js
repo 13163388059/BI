@@ -4,6 +4,8 @@ export default {
   children: [{
       name: '8001',
       title: '系统设置',
+      color:"rgb(0,135,255)",
+      icon:'icon-xitongshezhi',
       width:2,
       children: [
         {

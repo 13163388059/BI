@@ -6,6 +6,8 @@ export default {
       name: '1001',
       title: '首页',
       width:2,
+      color:"rgb(0,135,255)",
+      icon:'icon-shouye',
       children: [
         {
           name:'100101',
@@ -18,6 +20,8 @@ export default {
     {
       name: '1002',
       title: '人员异动',
+      color:"rgb(0,135,255)",
+      icon:'icon-renyuanyidong',
       children: [
         {
           name:'100201',
@@ -30,6 +34,8 @@ export default {
     {
       name: '1003',
       title: '项目一号查询',
+      color:"rgb(0,135,255)",
+      icon:'icon-xiangmuyihaochaxun',
       children: [
         {
           name:'100301',
@@ -42,6 +48,8 @@ export default {
     {
       name: '1004',
       title: '预算分解结构',
+      color:"rgb(0,135,255)",
+      icon:'icon-yusuanfenjiejiegou',
       children: [
         {
           name:'100401',
@@ -54,6 +62,8 @@ export default {
     {
       name: '1005',
       title: '资产生命周期',
+      color:"rgb(0,135,255)",
+      icon:'icon-zichanshenmingzhouqi',
       children: [
         {
           name:'100501',
@@ -66,11 +76,13 @@ export default {
     {
       name: '1006',
       title: '应急事件跟踪',
+      color:"rgb(0,135,255)",
+      icon:'icon-yingjishijiangenzhong',
       children: [
         {
           name:'100601',
           component: () =>
-          import ('../../components/pages/Desktop/Event/Index.vue'),
+          import ('../../components/pages/home/Home.vue'),
           title: '应急事件跟踪'
         }
       ]
@@ -78,6 +90,8 @@ export default {
     {
       name: '1007',
       title: '应急预案',
+      color:"rgb(0,135,255)",
+      icon:'icon-yingjiyuan',
       children: [
         {
           name:'100701',
@@ -90,6 +104,8 @@ export default {
     {
       name: '1008',
       title: '安全事故跟踪',
+      color:"rgb(0,135,255)",
+      icon:'icon-anquanshigugenzong',
       children: [
         {
           name:'100801',
@@ -102,6 +118,8 @@ export default {
     {
       name: '1009',
       title: '隐患排查',
+      color:"rgb(0,135,255)",
+      icon:'icon-yinhuanpaicha',
       children: [
         {
           name:'100901',

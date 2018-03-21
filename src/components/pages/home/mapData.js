@@ -15391,7 +15391,7 @@ var Bridge =[
       "LOCRELAT": null,
       "MPEXLASTDATA": null
     }
-  ];
+  ].filter(i=>(Math.random() < 0.1));
 var Station=[
     {
       "MPID": "671ade47-25ea-4b7c-b521-951bee8cbb36",
@@ -15900,7 +15900,11 @@ var Station=[
   ];
 
 
-  export default {
-    Tunnel,Bridge,Station
+
+
+export {
+  Tunnel,
+  Bridge,
+  Station
 }
 

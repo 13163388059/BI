@@ -27,7 +27,7 @@ export default {
 function init(myChart) {
   const option = {
     title: {
-      text: "党纪工团每年人数",
+      text: "党纪团每年人数",
       subtext: "每年",
       x: "center"
     },
@@ -40,7 +40,7 @@ function init(myChart) {
     },
     legend: {
       left: "left",
-      data: ["党委", "纪委", "工会", "团委"]
+      data: ["党委", "纪委", "团委"]
     },
     xAxis: {
       type: "category",
@@ -62,12 +62,6 @@ function init(myChart) {
         type: "line",
         smooth: true,
         data: [102, 88, 92, 76, 110]
-      },
-      {
-        name: "工会",
-        type: "line",
-        smooth: true,
-        data: [109, 210, 229, 340, 334]
       },
       {
         name: "团委",

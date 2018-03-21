@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import CSS_RESET from './css/reset.css'
+import ICON from './css/iconfont/iconfont.css'
 import App from './components/main/App.vue'
 import router from './router'
 import store from './store'

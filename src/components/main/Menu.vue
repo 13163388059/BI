@@ -2,14 +2,14 @@
 	<div class="mask_menu" ref='mask' :style="{opacity: isShow?1:0,transitionDelay:isShow?'0.1s':'0s'}">
 		<div class="mask_menu__container" ref="menu">
 			<div v-for='(item,index) in menu' class="mask_menu__item" :style="{width:150*width+'px',height:120*height+'px'}">
-				<div class="mask_menu__title" :style='{height:titleHeight+"px",lineHeight:titleHeight+"px",top:-1*titleHeight+"px"}'>{{index}}</div>
+				<div class="mask_menu__title" :style='{height:titleHeight+"px",lineHeight:titleHeight+"px",top:-1*titleHeight+"px"}'>{{item.title}}</div>
 
-				<div v-for='(block,index) in item.blocks' :style="{width:block.width*150 +'px',height:block.height*120 +'px',padding:'3px'}"
+				<div v-for='(block,_index) in item.blocks' :style="{width:block.width*150 +'px',height:block.height*120 +'px',padding:'3px'}"
 				 class="mask_menu__block">
-					<div class="mask_menu__block__core" :style="{lineHeight: block.height*120 - 3*2 +'px'}">
+					<div class="mask_menu__block__core" :style="{lineHeight: block.height*120 - 3*2 +'px',background:block.color}" >
 						
                 		<div class="mask_menu--block_name">{{block.name}}</div>
-                		<div :class="block.icon+' mask_menu--block_icon'"></div>
+                		<div :class="block.icon+' mask_menu--block_icon ' + 'iconsize_'+block.height+block.width" :data-row = 'index' :data-col = '_index' @click='blockClick'></div>
 					</div>
 				</div>
 			</div>
@@ -26,107 +26,18 @@
 				width: 2,
 				height: 5,
 				titleHeight: 48,
-				items: [{
-					title: '',
-					blocks: [{
-						name: '测试',
-						width: 3,
-						height: 1,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 1,
-						height: 1,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 2,
-						height: 1,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 2,
-						height: 1,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 1,
-						height: 1,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 1,
-						height: 2,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 2,
-						height: 1,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 1,
-						height: 1,
-						float: 'left'
-					}, {
-						name: '测试',
-						width: 1,
-						height: 1,
-						float: 'left'
-					}]
-				},
-				{
-					title: '',
-					blocks: [{
-						name: '测试',
-						width: 3,
-						height: 1,
-						float: 'left'
-					}]
-				},
-				{
-					title: '',
-					blocks: [{
-						name: '测试',
-						width: 3,
-						height: 1,
-						float: 'left'
-					}]
-				},
-				{
-					title: '',
-					blocks: [{
-						name: '测试',
-						width: 3,
-						height: 1,
-						float: 'left'
-					}]
-				},
-				{
-					title: '',
-					blocks: [{
-						name: '测试',
-						width: 3,
-						height: 1,
-						float: 'left'
-					}]
-				},
-				{
-					title: '',
-					blocks: [{
-						name: '测试',
-						width: 3,
-						height: 1,
-						float: 'left'
-					}]
-				},
-				],
 				scrollObj: null
 			}
 		},
 		methods: {
 			test(test) {
 				this.scrollObj(test.deltaY)
+			},
+			blockClick(e){
+				const domSet = e.target.dataset
+				console.log(domSet)
+				this.$store.commit('router/choose',{row:domSet.row,col:domSet.col})
+				this.$emit('closeMenu')
 			}
 		},
 		computed:{
@@ -150,10 +61,6 @@
 		,
 		mounted() {
 			this.scrollObj = CreacteScroll(this.$refs.menu)
-
-
-			console.log("this.menu")
-			console.log(this.menu)
 
 			//添加鼠标滚轮监听
 			addMouseWheelEvent(
@@ -266,17 +173,21 @@
 		transform: translate(0, -50%);
 		margin-left: 48px;
 	}
-	.mask_menu__item:first-child {
+	/* .mask_menu__item:first-child {
 		margin-left: 256px;
-	}
+	} */
 
+	.mask_menu__item:last-child {
+		margin-right: 48px;
+	}
 	.mask_menu__title {
 		text-align: left;
 		position: absolute;
 		left: 0;
 		right: 0;
 		color: #fff;
-		font-size: 24px
+		font-size: 24px;
+		font-weight: 700;
 	}
 
 	.mask_menu__block {
@@ -287,7 +198,7 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
-		background-color: aqua;
+		/* background-color: aqua; */
 		border-radius: 1px;
 		transition: all 0.5 ease-out;
 		text-align: center;
@@ -318,7 +229,11 @@
 		left: 0;
 		height: 120px;
 		line-height: 110px;
-		font-size: 56px;
+		font-size: 48px;
 		width: 100%;
+	}
+
+	.iconsize_11{
+		font-size: 40px;
 	}
 </style>

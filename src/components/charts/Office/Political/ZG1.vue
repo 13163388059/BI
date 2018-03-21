@@ -27,7 +27,7 @@ export default {
 function init(myChart) {
   const option = {
     title: {
-      text: "党纪工团各成员数",
+      text: "党纪团各成员数",
       subtext: "当年",
       x: "center"
     },
@@ -39,7 +39,7 @@ function init(myChart) {
       orient: "vertical",
       left: "left",
       top: "middle",
-      data: ["党委", "纪委", "工会", "团委"]
+      data: ["党委", "纪委", "团委"]
     },
     series: [
       {
@@ -50,7 +50,6 @@ function init(myChart) {
         data: [
           { value: 135, name: "党委" },
           { value: 110, name: "纪委" },
-          { value: 334, name: "工会" },
           { value: 535, name: "团委" }
         ]
       }

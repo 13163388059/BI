@@ -2,7 +2,7 @@
   <div id="app">
     <div :class='{"top_bar":true,"top_bar--hide_menu":!isMenuShow,"top_bar--show_menu":isMenuShow}'>
       <bi-header @switchAside ='switchAside' @switchMenu ='switchMenu' ></bi-header>
-      <bi-menu :isShow ='isMenuShow'></bi-menu>
+      <bi-menu :isShow ='isMenuShow' @closeMenu ='switchMenu'></bi-menu>
     </div>
 
       <div :class = ' {"body--hide_aside":!isSideShow,"body--show_aside":isSideShow}'>
@@ -124,6 +124,8 @@ html,body{
   top: 0;left: -240px;bottom: 0;
   width: 240px;
   background-color: #262d35;
+  overflow: auto;
+  padding-top: 32px;
 }
 
 .page_container{
