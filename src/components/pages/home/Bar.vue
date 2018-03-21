@@ -3,7 +3,7 @@
         <div class="gis_toolbar--unit" v-for="(v,i) in units">
             <div class="gis_toolbar--text">{{v.name}}</div>
             <div class="gis_toolbar--panel">
-              <div class="gis_toolbar--item" v-for="(item,index) in v.children">{{item.name}}</div>
+              <div class="gis_toolbar--item" v-for="(item,index) in v.children" @click="itemClick" :id = 'item.name'>{{item.name}}</div>
             </div>
         </div>
     </div>
@@ -56,6 +56,11 @@ export default {
         },
       ]
     }
+  },
+  methods: {
+    itemClick(e) {
+      this.$emit('barItemClick', { type: e.target.id })
+    }
   }
 }
 </script>
@@ -71,6 +76,7 @@ export default {
     background-color: #fff;
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.8);
     z-index: 1;
+    cursor: default;
 }
 
 .gis_toolbar--unit {
@@ -82,9 +88,11 @@ export default {
     margin: 6px 0 6px;
     border-left: solid 1px #666;
     transition: all 0.3s ease-out;
+    cursor: default;
 
     * {
         transition: all 0.3s ease-out;
+        cursor: default;
     }
 
     &:first-child {
@@ -92,25 +100,28 @@ export default {
     }
 
     .gis_toolbar--panel {
-        background-color: aqua;
+        background-color: #fff;
         position: absolute;
         left: 0;
         right: 0;
         top: 41px;
         height: 0;
         overflow: hidden;
-        
-         box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.8);
-        .gis_toolbar--item{
-          height: 30px;
-          line-height: 30px;
 
-          &:first-child{
-            margin-top:-15px;
-          }
-          &:last-child{
-            margin-bottom:-15px;
-          }
+        box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.8);
+        .gis_toolbar--item {
+            height: 30px;
+            line-height: 30px;
+
+            &:first-child {
+                margin-top: -15px;
+            }
+            &:last-child {
+                margin-bottom: -15px;
+            }
+            &:hover{
+              background: rgb(194, 194, 194)
+            }
         }
     }
 
@@ -120,10 +131,10 @@ export default {
         z-index: 2;
     }
 
-    &::after{
-      content: '';
-      display: block;
-      height: 11px;
+    &::after {
+        content: '';
+        display: block;
+        height: 11px;
     }
 }
 </style>

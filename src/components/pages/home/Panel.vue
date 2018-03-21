@@ -1,29 +1,35 @@
 <template lang="html">
   <div :class="'detail_panel--container ' + computed_state">
     <div v-if='isShow' :class="'detail_panel ' + computed_state">
-
       <div class="detail_panel--header">
-        {{title}}
+        {{computed_data.title}}
         <div class="detail_panel--close_btn el-icon-error" @click='close'></div>
       </div>
       <div class="detail_panel--info">
-        {{info}}
+        {{computed_data.info}}
       </div>
-
       <div class="detail_panel--camera__small" @click = 'focusSmall'>
         <div class="detail_panel--camera_title">监控</div>
         <div class="detail_panel--camera_content">
           <div>
-            <div style="background-color:aqua"></div>
+            <div style="background-color:#000" >
+                <video :src='computed_data.video[0]' autoplay="autoplay" loop='loop'></video>
+            </div>
           </div>
           <div>
-            <div style="background-color:aqua"></div>
+            <div style="background-color:#000">
+                <video :src='computed_data.video[1]' autoplay="autoplay" loop='loop'></video>
+            </div>
           </div>
           <div>
-            <div style="background-color:aqua"></div>
+            <div style="background-color:#000">
+                <video :src='computed_data.video[2]' autoplay="autoplay" loop='loop'></video>
+            </div>
           </div>
           <div>
-            <div style="background-color:aqua"></div>
+            <div style="background-color:#000">
+                <video :src='computed_data.video[3]' autoplay="autoplay" loop='loop'></video>
+            </div>
           </div>
         </div>
 
@@ -31,7 +37,9 @@
       <div class="detail_panel--camera__main" @click = 'focusMain'>
         <div class="detail_panel--camera_title">实景</div>
         <div class="detail_panel--camera_content">
-          <div style="background-color:aqua;"></div>
+          <div style="background-color:aqua;">
+              <iframe :src='computed_data.view'></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -40,44 +48,87 @@
 
 <script>
 export default {
-  name: 'bi-panel',
-  props: ['isShow'],
-  data() {
-    return {
-      title: '管理所名字',
-      info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。
+    name: 'bi-panel',
+    props: ['isShow','type'],
+    data() {
+        return {
 
-      如果你正在阅读本文，很可能你已经对WASM有一定的了解。如果你不了解，那么你可以好好看看 webassembly.org。就在本文发布的时候，WebAssembly 刚刚达成了 浏览器预览里程碑，这意味着WebAssembly版本1很可能和当前草案所描述的一致。本文的细节基于版本mvp-13。
+            states: {
+                all: ['default', 'focus_main', 'focus_small'],
+                now: 'default'
+            },
 
-      WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。
+            data: {
+                ['blank']:{
+                    title:'1',
+                    info:'1',
+                    video:['1','1','1','1'],
+                    view:'http://ecs.whwckj.com:1001/res',
+                },
+                ['收费站/管理所']: {
+                    title: '管理所名字',
+                    info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。`,
+                    video:[
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4'
+                    ],
+                    view:'http://ecs.whwckj.com:1001/res',
+                },
+                ['隧道']: {
+                    title: '管理所名字',
+                    info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。`,
+                    video:[
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4'
+                    ],
+                    view:'http://ecs.whwckj.com:1001/res',
+                },
+                ['桥梁']: {
+                    title: '管理所名字',
+                    info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。`,
+                    video:[
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
+                        'http://ecs.whwckj.com:1001/res/File/station.mp4'
+                    ],
+                    view:'http://ecs.whwckj.com:1001/res',
+                }
 
-      如果你正在阅读本文，很可能你已经对WASM有一定的了解。如果你不了解，那么你可以好好看看 webassembly.org。就在本文发布的时候，WebAssembly 刚刚达成了 浏览器预览里程碑，这意味着WebAssembly版本1很可能和当前草案所描述的一致。本文的细节基于版本mvp-13。
-      `,
-      states: {
-        all: ['default', 'focus_main', 'focus_small'],
-        now: 'default'
-      }
-    }
-  },
-  computed: {
-    computed_state() {
-      return this.states.all.reduce(
-        (res, val) => (val == this.states.now ? this.states.now : res), 'defult')
-    }
-  },
-  methods: {
-    close() {
-      this.$emit('close')
+            }
+        }
     },
-    focusMain(){
-        if(this.states.now !== 'focus_main') this.states.now = 'focus_main'
-        else this.states.now = 'default'
+    computed: {
+        computed_state() {
+            return this.states.all.reduce(
+                (res, val) => (val == this.states.now ? this.states.now : res), 'defult')
+        },
+        computed_data(){
+            return this.data[this.type]?this.data[this.type]:this.data['blank']
+        }
     },
-    focusSmall(){
-        if(this.states.now !== 'focus_small') this.states.now = 'focus_small'
-        else this.states.now = 'default'
+    methods: {
+        close() {
+            this.$emit('close')
+        },
+        focusMain() {
+            if (this.states.now !== 'focus_main') this.states.now = 'focus_main'
+            else this.states.now = 'default'
+        },
+        focusSmall() {
+            this.console()
+
+            if (this.states.now !== 'focus_small') this.states.now = 'focus_small'
+            else this.states.now = 'default'
+        },
+        console(){
+            console.log(this.type)
+        }
     }
-  }
 
 }
 </script>
@@ -162,7 +213,7 @@ $small_video_width: 117px;
         top: 0;
         right: 0;
 
-        .detail_panel{
+        .detail_panel {
             top: $outer_space;
             bottom: $outer_space;
             left: $outer_space;
@@ -200,7 +251,6 @@ $small_video_width: 117px;
                 }
             }
         }
-        
     }
 
     .detail_panel {
@@ -239,7 +289,7 @@ $small_video_width: 117px;
             height: $main_video_height+$title_height;
             left: $space;
             right: $space;
-            margin-top:2*$space;
+            margin-top: 2*$space;
             .detail_panel--camera_content div {
                 height: $main_video_height;
                 width: $main_video_width;
@@ -252,7 +302,7 @@ $small_video_width: 117px;
             height: $small_video_height+$title_height+2*$space;
             left: $space;
             right: $space;
-            margin-top:2*$space;
+            margin-top: 2*$space;
             .detail_panel--camera_content > div {
                 height: $small_video_height;
                 width: $small_video_width;
@@ -288,7 +338,11 @@ $small_video_width: 117px;
             overflow: auto;
             color: $font_color;
         }
-        
     }
+}
+
+video,iframe{
+    width: 100%;
+    height: 100%;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <img  class="header__logo" src="../../assets/mtlogo_hh_small.png">
-    <div  class="header__aside el-icon-menu" @click = 'aslide_click'></div>
+    <img  class="header__logo" src="../../assets/mtlogo_hh_small.png" >
+    <div  class="header__aside icon-bars" @click = 'aslide_click'></div>
     <div  class="header__menu el-icon-menu" @click = 'menu_click'></div>
     <div  class="header__seach_bar"></div>
     <div  class="header__name">

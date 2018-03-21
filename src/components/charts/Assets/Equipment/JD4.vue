@@ -1,0 +1,52 @@
+<template lang="html">
+  <div style="height:100%;width:100%" ref  = 'chart' >
+  </div>
+</template>
+
+<script>
+import installTheme from "../../theme";
+
+installTheme({}, echarts);
+
+export default {
+  name: "page-test",
+  data() {
+    return {};
+  },
+  methods: {},
+  mounted() {
+    const myChart = echarts.init(this.$refs.chart, "darkk"),
+      _this = this;
+
+    init(myChart);
+
+    _this.$store.commit("charts/push", myChart);
+  }
+};
+
+function init(myChart) {
+  const option = {
+    title: {
+      text: "年度机电故障率分布情况"
+    },
+    tooltip: {
+      trigger: "axis"
+    },
+    xAxis: {
+      type: "category",
+      data: ["物料", "电压保护器", "电池柜", "单臂广场灯"]
+    },
+    yAxis: {
+      type: "value"
+    },
+    series: [
+      {
+        data: [200, 150, 100, 130],
+        type: "bar"
+      }
+    ]
+  };
+  myChart.setOption(option);
+}
+</script>
+
