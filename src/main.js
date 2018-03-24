@@ -30,8 +30,8 @@ import {
   // OptionGroup,
   // Button,
   // ButtonGroup,
-  // Table,
-  // TableColumn,
+  Table,
+  TableColumn,
   // DatePicker,
   // TimeSelect,
   // TimePicker,
@@ -41,8 +41,8 @@ import {
   // BreadcrumbItem,
   // Form,
   // FormItem,
-  // Tabs,
-  // TabPane,
+  Tabs,
+  TabPane,
   // Tag,
   Tree,
   // Alert,
@@ -75,9 +75,17 @@ import {
   // Notification
 } from 'element-ui'
 
+import Container from './components/common/container.vue'
+
+
 window.echarts = echarts
 
 Vue.use(Tree)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.component('bi-container',Container)
 
 new Vue({
   el: '#app',
@@ -88,3 +96,9 @@ new Vue({
   },
   render: h => h(App)
 })
+
+
+
+//window.STATIC_URL = 'http://ecs.whwckj.com:1001/'
+
+window.STATIC_URL = 'http://localhost:'+ require('../server/server.config').port +'/'

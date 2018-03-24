@@ -90,20 +90,21 @@ export default {
     background-color: rgba(0, 0, 0, 0) !important;
 }
 
-/* .aside .el-tree > .el-tree-node.is-current > .el-tree-node__content::before, */
-.aside .el-tree > .el-tree-node.is-expanded > .el-tree-node__content::before {
+.aside .el-tree > .el-tree-node.is-current > .el-tree-node__content::before,
+.aside .el-tree > .el-tree-node.is-expanded > .el-tree-node__content::before,
+.aside .el-tree > .el-tree-node.is-checked > .el-tree-node__content::before {
     content: '';
     display: inline-block;
-    height: 100%;
+    height: 100%!important;
     width: 2px;
     background-color: aqua;
 }
 .aside .el-tree > .el-tree-node.is-expanded > .el-tree-node__content {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgb(37,45,56) !important;
 }
 
 .aside .el-tree .el-tree-node.is-checked > .el-tree-node__content {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color:rgb(37,45,56) !important;
 }
 
 .aside .el-tree .el-tree-node.is-current > .el-tree-node__content,

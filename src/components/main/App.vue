@@ -59,7 +59,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #fff;
+  color: rgba(255,255,255,0.9);
   height: 100%;
   width: 100%;
   font-size: 14px;
@@ -82,13 +82,13 @@ html,body{
   position: absolute;
   left: 0;top: 0;right: 0;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-  z-index:2;
+  z-index:99;
   overflow: hidden;
   transition: all 0.2s ease
 }
 .top_bar--hide_menu{
   height: 48px;
-  background-color: rgba(26, 39, 47, 1);
+  /* background-color: rgba(26, 39, 47, 1); */
   /* background-color: rgba(35, 47, 59, 1); */
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 }
@@ -108,14 +108,17 @@ html,body{
 .body--hide_aside{
   position: absolute;
   top: 48px;left: 0;right: 0;bottom: 0;
-  background: linear-gradient(to right, #1e2430, #1d2731);
+  /* background: linear-gradient(to right, #1e2430, #1d2731); */
+  background: linear-gradient(to right, rgb(37,45,56),rgb(43,51,61));
   transition: all 0.2s ease-out;
 }
 
 .body--show_aside{
   position: absolute;
   top: 48px;left: 240px;right: 0;bottom: 0;
-  background: linear-gradient(to right, #1e2430, #1d2731);
+  /* background: linear-gradient(to right, #1e2430, #1d2731); */
+  
+  background: linear-gradient(to right, rgb(37,45,56),rgb(43,51,61));
   transition: all 0.2s ease-out;
 }
 
@@ -123,7 +126,7 @@ html,body{
   position: absolute;
   top: 0;left: -240px;bottom: 0;
   width: 240px;
-  background-color: #262d35;
+  background-color: rgb(45,55,70);
   overflow: auto;
   padding-top: 32px;
 }

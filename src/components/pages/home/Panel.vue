@@ -49,7 +49,7 @@
 <script>
 export default {
     name: 'bi-panel',
-    props: ['isShow','type'],
+    props: ['isShow', 'type'],
     data() {
         return {
 
@@ -59,44 +59,44 @@ export default {
             },
 
             data: {
-                ['blank']:{
-                    title:'1',
-                    info:'1',
-                    video:['1','1','1','1'],
-                    view:'http://ecs.whwckj.com:1001/res',
+                ['blank']: {
+                    title: '1',
+                    info: '1',
+                    video: ['1', '1', '1', '1'],
+                    view: 'res',
                 },
                 ['收费站/管理所']: {
                     title: '管理所名字',
                     info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。`,
-                    video:[
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4'
+                    video: [
+                        window.STATIC_URL + 'res/File/station1.mp4',
+                        window.STATIC_URL + 'res/File/station2.mp4',
+                        window.STATIC_URL + 'res/File/station3.mp4',
+                        window.STATIC_URL + 'res/File/station4.mp4'
                     ],
-                    view:'http://ecs.whwckj.com:1001/res',
+                    view: window.STATIC_URL + 'res/Index.html',
                 },
                 ['隧道']: {
                     title: '管理所名字',
                     info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。`,
-                    video:[
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4'
+                    video: [
+                        window.STATIC_URL + 'res/File/station1.mp4',
+                        window.STATIC_URL + 'res/File/station2.mp4',
+                        window.STATIC_URL + 'res/File/station3.mp4',
+                        window.STATIC_URL + 'res/File/station4.mp4'
                     ],
-                    view:'http://ecs.whwckj.com:1001/res',
+                    view: window.STATIC_URL + 'res/Index.html',
                 },
                 ['桥梁']: {
                     title: '管理所名字',
                     info: `WebAssembly, 简称WASM, 是一种以安全有效的方式运行可移植程序的新技术，主要针对Web平台。 与 ASM.js类似, WASM的目标是对高级程序中间表示的适当低级抽象，即，WebAssembly代码旨在由编译器生成而不是由人来写。 W3C 社区组 拥有来自于最大Web浏览器厂商的代表，比如Google, Microsoft, Apple 和 Mozilla ，非常令人期待。`,
-                    video:[
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4',
-                        'http://ecs.whwckj.com:1001/res/File/station.mp4'
+                    video: [
+                        window.STATIC_URL + 'res/File/station1.mp4',
+                        window.STATIC_URL + 'res/File/station2.mp4',
+                        window.STATIC_URL + 'res/File/station3.mp4',
+                        window.STATIC_URL + 'res/File/station4.mp4'
                     ],
-                    view:'http://ecs.whwckj.com:1001/res',
+                    view: window.STATIC_URL + 'res/Index.html',
                 }
 
             }
@@ -107,8 +107,8 @@ export default {
             return this.states.all.reduce(
                 (res, val) => (val == this.states.now ? this.states.now : res), 'defult')
         },
-        computed_data(){
-            return this.data[this.type]?this.data[this.type]:this.data['blank']
+        computed_data() {
+            return this.data[this.type] ? this.data[this.type] : this.data['blank']
         }
     },
     methods: {
@@ -125,7 +125,7 @@ export default {
             if (this.states.now !== 'focus_small') this.states.now = 'focus_small'
             else this.states.now = 'default'
         },
-        console(){
+        console() {
             console.log(this.type)
         }
     }
@@ -340,8 +340,8 @@ $small_video_width: 117px;
         }
     }
 }
-
-video,iframe{
+video,
+iframe {
     width: 100%;
     height: 100%;
 }
