@@ -1,7 +1,7 @@
 <template>
-    <div class="container" :style="_outerStyle">
+    <div class="container" :style="_outerStyle" >
         <div class="item">
-            <div class="block" :style='innerStyle'>
+            <div :class="blockClass" :style='innerStyle'>
                 <slot />
             </div>
         </div>
@@ -15,7 +15,9 @@ export default {
         'outerStyle',
         'w',
         'h',
-        'float'],
+        'float',
+        'color'
+        ],
     computed: {
         _outerStyle() {
             return Object.assign(
@@ -25,6 +27,13 @@ export default {
                     height: this.h ? this.h : '100%',
                     float: this.float ? this.float : 'left',
                 })
+        },
+
+        blockClass(){
+            console.log(this.color)
+            if (!this.color) return 'block'
+
+            return 'block color color'+this.color
         }
     }
 }
@@ -56,5 +65,28 @@ export default {
     background-color: rgba(45, 55, 70, 0.6);
     border-radius: 0px;
     position: relative;
+}
+
+.color::after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+
+.color1::after {
+    background: linear-gradient(to right, #898579, #898579);
+}
+.color2::after {
+    background: linear-gradient(to right, #4e3956, #392b3c);
+}
+.color3::after {
+    background: linear-gradient(to right, #684c58, #684c58);
+}
+.color4::after {
+    background: linear-gradient(to right, #898579, #898579);
 }
 </style>
