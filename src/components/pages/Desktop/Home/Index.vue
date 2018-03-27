@@ -3,82 +3,82 @@
 
     <bi-container tab h='15%' w ='20%'  :color = '1'> 
       <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3234</div>
+              <div class='count--outer title'>
+                <div class='count--title'>年度预算</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>预算</div>
+              <div class='count--outer value'>
+                <div class='count--value'>政  采：1256.35 万元<br>非政采：731.50 万元</div>
               </div>
             </div>
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3456</div>
+              <div class='count--outer title'>
+                <div class='count--title'>预算执行</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>执行</div>
+              <div class='count--outer value'>
+                <div class='count--value'>执行率: 32.7%<br>同比上月增长: 5%</div>
               </div>
             </div>
-          
     </bi-container>
 
         <bi-container tab h='15%' w ='20%' :color = '1'>
        <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3234</div>
+              <div class='count--outer title'>
+                <div class='count--title'>可用固定资产</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>资产</div>
+              <div class='count--outer value'>
+                <div class='count--value'>总数: 18653件<br>报废资产: 335件</div>
               </div>
             </div>
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3456</div>
+              <div class='count--outer title'>
+                <div class='count--title'>资产残余</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>出入库</div>
+              <div class='count--outer value'>
+                <div class='count--value'>残余价值: 23654万元<br>残余比例: 93%</div>
               </div>
             </div>
           
-          
-    </bi-container>
-
-        <bi-container tab h='15%' w ='20%' :color = '1'>
-      
-            <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3234</div>
-              </div>
-              <div class='count--outer'>
-                <div class='count--title'>路 政<br>违 法</div>
-              </div>
-            </div>
-            <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3456</div>
-              </div>
-              <div class='count--outer'>
-                <div class='count--title'>养 护<br>计 划</div>
-              </div>
-            </div>
           
     </bi-container>
 
         <bi-container tab h='15%' w ='20%' :color = '1'>
       
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3234</div>
+              <div class='count--outer title'>
+                <div class='count--title'>年度路政违法事件</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>收 费<br>稽 核</div>
+              <div class='count--outer value'>
+                <div class='count--value'>共325起<br>未处理5起</div>
               </div>
             </div>
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>3456</div>
+              <div class='count--outer title'>
+                <div class='count--title'>年度养护计划</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>流 量<br>路 况</div>
+              <div class='count--outer value'>
+                <div class='count--value'>共 1352 项<br>为执行 431 项</div>
+              </div>
+            </div>
+          
+    </bi-container>
+
+        <bi-container tab h='15%' w ='20%' :color = '1'>
+      
+            <div class = 'container' style="width:50%;height:100%;padding:16px 0">
+              <div class='count--outer title'>
+                <div class='count--title' >日收费额</div>
+              </div>
+              <div class='count--outer value'>
+                <div class='count--value'>etc: 64万元<br>
+mtc: 588万元</div>
+              </div>
+            </div>
+            <div class = 'container' style="width:50%;height:100%;padding:16px 0">
+              <div class='count--outer title'>
+                <div class='count--title'>日流量</div>
+              </div>
+              <div class='count--outer value'>
+                <div class='count--value'>入口: 17532 辆<br>出口: 17532 辆</div>
               </div>
             </div>
           
@@ -86,19 +86,19 @@
 
         <bi-container tab h='15%' w ='20%' :color = '1'>
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>4645</div>
+              <div class='count--outer title'>
+                <div class='count--title'>年度安全隐患</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>安 全<br>隐 患</div>
+              <div class='count--outer value'>
+                <div class='count--value'>累计 142 项<br>已处理 142 项</div>
               </div>
             </div>
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'>456</div>
+              <div class='count--outer title'>
+                <div class='count--title'>年度突发事件</div>
               </div>
-              <div class='count--outer'>
-                <div class='count--title'>事 件</div>
+              <div class='count--outer value'>
+                <div class='count--value'>累计 3 起<br>已处置 3 起</div>
               </div>
             </div>
     </bi-container>
@@ -142,8 +142,20 @@
     </bi-container>
 
     <bi-container video h='30%' w ='25%'>
-      <div v-for="(v,i) in new Array(4)" style='width:50%;height:50%;float:left;padding:8px' >
-        <img src='../../../../assets/logo.png' style='width:100%;height:100%' />
+      <div style='width:50%;height:50%;float:left;padding:8px' >
+        <img src='../../../../assets/video0.jpg' style='width:100%;height:100%' />
+      </div>
+      
+      <div style='width:50%;height:50%;float:left;padding:8px' >
+        <img src='../../../../assets/video1.jpg' style='width:100%;height:100%' />
+      </div>
+      
+      <div style='width:50%;height:50%;float:left;padding:8px' >
+        <img src='../../../../assets/video2.jpg' style='width:100%;height:100%' />
+      </div>
+      
+      <div style='width:50%;height:50%;float:left;padding:8px' >
+        <img src='../../../../assets/video3.jpg' style='width:100%;height:100%' />
       </div>
     </bi-container>
     
@@ -156,7 +168,7 @@
 </template>
 
 <script>
-import chart from '../../../charts/Finance/Project/PJ3'
+import chart from '../../../charts/Assets/OfficeAssets/ZC15'
 import Msg from './Msg.vue'
 import tabData from './tabData'
 import BMap from './Map.vue'
@@ -274,13 +286,15 @@ export default {
     vertical-align: middle;
     text-align: center;
     font-size: 16px;
+    opacity: 0.9;
     font-weight: 700;
 }
 .count--value {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    font-size: 28px;
+    font-size: 14px;
+    line-height: 22px;
     color: #fff;
     font-weight: 700;
 }
@@ -299,6 +313,18 @@ export default {
     display: table;
     width: 100%;
     height: 50%;
+}
+
+
+.count--outer.title {
+    display: table;
+    width: 100%;
+    height: 30%;
+}
+.count--outer.value {
+    display: table;
+    width: 100%;
+    height: 70%;
 }
 
 .container.tab {
