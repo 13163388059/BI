@@ -1,8 +1,8 @@
 <template>
     <!-- <div class='main'> -->
         <transition-group name="flip-list" tag="div" class='main'>
-        <div v-for="(item,index) in msg" class="item" :key='item' >
-            {{item}}
+        <div v-for="(item,index) in msg" class="item" :key='item' :class="item.type" >
+            <i :class="'iconfont icon-'+item.type"></i> {{item.text}} 
         </div>
   </transition-group>
     <!-- </div> -->
@@ -14,13 +14,11 @@ export default {
     data(){
         return {
             msg:[
-            2312312,
-            13221313,
-            2313132131,
-            1231312421421,
-            241412413123,
-            3424242432,
-            4213421412141
+            {text:32131321,type:'alert'},
+            {text:32131321,type:'pre_alert'},
+            {text:32131321,type:'warn'},
+            {text:32131321,type:'warn'},
+            {text:32131321,type:'msg'},
         ]
         }
     },
@@ -34,7 +32,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style  scoped>
+
+</style>
+
+<style lang="scss" scoped>
+
 .main{
     overflow:hidden;
     height:100%;
@@ -43,15 +46,78 @@ export default {
 }
 .item{
     height: 32px;line-height: 32px;
-    margin: 4px;
+    margin: 4px 0;
     background-color: rgba(255,255,255,0.1);
     /* position: absolute; */
     width: 100%;
+    border-radius: 3px;
 }
 .flip-list-move {
   transition: transform 1s;
 }
 
-</style>
 
+
+
+.msg{
+    &{
+        background-color: rgba(0,122,204,0.6)
+    }
+
+    i{
+        font-style: normal;
+        font-size: 14px;padding-left: 8px;
+    }
+    i::after{
+        content: '推送消息:';
+        margin-left:4px;
+    }
+}
+
+.warn{
+    &{
+        background-color: rgba(255, 187, 0, 0.6)
+    }
+
+    i{
+        font-style: normal;
+        font-size: 14px;padding-left: 8px;
+    }
+    i::after{
+        content: '系统提醒:';
+        margin-left:4px;
+    }
+}
+
+.alert{
+    &{
+        background-color: rgba(255, 0, 0, 0.6)
+    }
+
+    i{
+        font-style: normal;
+        font-size: 14px;padding-left: 8px;
+    }
+    i::after{
+        content: '报警信息:';
+        margin-left:4px;
+    }
+}
+
+
+.pre_alert{
+    &{
+        background-color: rgba(255, 51, 0, 0.6)
+    }
+
+    i{
+        font-style: normal;
+        font-size: 14px;padding-left: 8px;
+    }
+    i::after{
+        content: '预警信息:';
+        margin-left:4px;
+    }
+}
+</style>
 

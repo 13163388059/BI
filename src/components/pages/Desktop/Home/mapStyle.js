@@ -136,7 +136,7 @@ export default {
       "featureType": "land",
       "elementType": "all",
       "stylers": {
-        "color": "#232f3bff",
+        "color": "#2C3542",
         "visibility": "on"
       }
     }

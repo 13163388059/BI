@@ -128,7 +128,7 @@ export default {
     color: rgba(255, 255, 255, 0.6);
 }
 
-label{
-  display: none;
+.aside label{
+  display: none!important;
 }
 </style>

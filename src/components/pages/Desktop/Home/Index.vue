@@ -1,64 +1,48 @@
 <template lang="html">
-  <div style="height:100%;width:100%" >
+  <div style="height:100%;width:100%;min-height:800px;min-width:1000px;overflow:auto;" >
 
-    <bi-container tab h='17%' w ='20%'  :color = '1'>
-            <div class = 'container' style="width:33%;height:100%;padding:16px 0">
+    <bi-container tab h='15%' w ='20%'  :color = '1'> 
+      <div class = 'container' style="width:50%;height:100%;padding:16px 0">
               <div class='count--outer'>
-                <div class='count--value'></div>
+                <div class='count--value'>3234</div>
               </div>
               <div class='count--outer'>
-                <div class='count--title'>总数</div>
-              </div>
-            </div>
-            <div class = 'container' style="width:33%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'></div>
-              </div>
-              <div class='count--outer'>
-                <div class='count--title'>正在<br>办理</div>
+                <div class='count--title'>预算</div>
               </div>
             </div>
-            <div class = 'container' style="width:33%;height:100%;padding:16px 0">
+            <div class = 'container' style="width:50%;height:100%;padding:16px 0">
               <div class='count--outer'>
-                <div class='count--value'></div>
+                <div class='count--value'>3456</div>
               </div>
               <div class='count--outer'>
-                <div class='count--title'>已完成</div>
+                <div class='count--title'>执行</div>
               </div>
             </div>
           
     </bi-container>
 
-        <bi-container tab h='17%' w ='20%' :color = '1'>
-      
-            <div class = 'container' style="width:33%;height:100%;padding:16px 0">
+        <bi-container tab h='15%' w ='20%' :color = '1'>
+       <div class = 'container' style="width:50%;height:100%;padding:16px 0">
               <div class='count--outer'>
-                <div class='count--value'></div>
+                <div class='count--value'>3234</div>
               </div>
               <div class='count--outer'>
-                <div class='count--title'>总数</div>
-              </div>
-            </div>
-            <div class = 'container' style="width:33%;height:100%;padding:16px 0">
-              <div class='count--outer'>
-                <div class='count--value'></div>
-              </div>
-              <div class='count--outer'>
-                <div class='count--title'>正在<br>办理</div>
+                <div class='count--title'>资产</div>
               </div>
             </div>
-            <div class = 'container' style="width:33%;height:100%;padding:16px 0">
+            <div class = 'container' style="width:50%;height:100%;padding:16px 0">
               <div class='count--outer'>
-                <div class='count--value'></div>
+                <div class='count--value'>3456</div>
               </div>
               <div class='count--outer'>
-                <div class='count--title'>已完成</div>
+                <div class='count--title'>出入库</div>
               </div>
             </div>
           
+          
     </bi-container>
 
-        <bi-container tab h='17%' w ='20%' :color = '1'>
+        <bi-container tab h='15%' w ='20%' :color = '1'>
       
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
               <div class='count--outer'>
@@ -79,7 +63,7 @@
           
     </bi-container>
 
-        <bi-container tab h='17%' w ='20%' :color = '1'>
+        <bi-container tab h='15%' w ='20%' :color = '1'>
       
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
               <div class='count--outer'>
@@ -100,7 +84,7 @@
           
     </bi-container>
 
-        <bi-container tab h='17%' w ='20%' :color = '1'>
+        <bi-container tab h='15%' w ='20%' :color = '1'>
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
               <div class='count--outer'>
                 <div class='count--value'>4645</div>
@@ -152,7 +136,7 @@
 
 
 
-    <bi-container map h='50%' w ='75%' float='right'>
+    <bi-container map h='52%' w ='75%' float='right'>
       
       <bi-map />
     </bi-container>
@@ -163,7 +147,7 @@
       </div>
     </bi-container>
     
-    <bi-container list h='20%' w ='25%' :innerStyle='{padding:"8px"}'>
+    <bi-container list h='22%' w ='25%' :innerStyle='{padding:"8px"}'>
       <bi-msg />
     </bi-container>
 

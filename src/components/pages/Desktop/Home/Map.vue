@@ -6,7 +6,7 @@
 
 <script>
 import { Tunnel, Bridge, Station, KMPile } from "./mapData";
-import mapStyle from "./mapStyle";
+import mapStyle from "./mapStyleNew";
 
 export default {
   name: "bi-map",
@@ -34,6 +34,7 @@ export default {
   },
   beforeDestroy() {
     this.$store.commit("charts/clean");
+    if(window.hlInterval) clearInterval(window.hlInterval)
   }
 };
 
@@ -49,203 +50,215 @@ function loadBaiduMap(dom) {
   };
 }
 
-let MP_ZOOMTOSCALE = {
-  "14": 1,
-  "13": 2,
-  "12": 5,
-  "11": 10,
-  "10": 20,
-  "9": 25,
-  "8": 50,
-  "7": 100,
-  "6": 200,
-  "5": 500
-};
+
 
 function renderMap(dom) {
   const map = new BMap.Map(dom);
+ 
   map.setMapStyle(mapStyle);
-  map.centerAndZoom(new BMap.Point(115.200075, 30.669524), 10);
-  map.enableScrollWheelZoom(true);
-  map.addEventListener("zoomend", function() {
-    createKMPileMarker(map);
-  });
-  map.addControl(
-    new BMap.ScaleControl({
-      anchor: BMAP_ANCHOR_TOP_LEFT,
-      offset: new BMap.Size(60, 75)
-    })
-  );
-  map.addControl(new BMap.NavigationControl({ offset: new BMap.Size(15, 60) }));
-  setBMapHighlight(map);
-  createKMPileMarker(map);
+  map.centerAndZoom(new BMap.Point(112.187097,31.051866), 8);
   setBMapBoundary(map);
+  var dates = [
+    {
+      "MPID": "ddd97773-940b-4ad7-b386-f36b22700516",
+      "MPTYPE": "EmergentEvent",
+      "MPTYPENAME": "突发事件",
+      "HIGHWAY": "G42S",
+      "SECTION": "双向",
+      "SECTIONID": 3,
+      "PILENORS": "39.590",
+      "PILENORE": "74.711",
+      "MPCODE": "c648929d-3843-48c5-9852-03d0bbae605b",
+      "MPNAME": "恶劣天气",
+      "MPTEXT": "从汪集-总路咀发生事故！",
+      "MPEXDATA": "-1",
+      "PILENO": "39.590",
+      "LOCWGSLON": null,
+      "LOCWGSLAT": null,
+      "LOCCUSLON": 114.728224586800000000000,
+      "LOCCUSLAT": 30.795007322575000000000,
+      "LOCRSLON": 114.728224586800000000000,
+      "LOCRSLAT": 30.795007322575000000000,
+      "LOCRELON": 115.060696265990000000000,
+      "LOCRELAT": 30.706550477334000000000,
+      "MPEXLASTDATA": "-1"
+    },
+    {
+      "MPID": "bfafe601-e00a-4bb1-947c-edad5a919f78",
+      "MPTYPE": "EmergentEvent",
+      "MPTYPENAME": "突发事件",
+      "HIGHWAY": "G42S",
+      "SECTION": "武英向",
+      "SECTIONID": 1,
+      "PILENORS": "123.400",
+      "PILENORE": "125.600",
+      "MPCODE": "e9ffc0d3-4e1a-4258-a5f6-f43cb47f2707",
+      "MPNAME": "凤凰关、濛濛山桥隧群危化品运输事故",
+      "MPTEXT": "从凤凰关隧道-濛濛山隧道发生事故！",
+      "MPEXDATA": "-1",
+      "PILENO": "123.400",
+      "LOCWGSLON": null,
+      "LOCWGSLAT": null,
+      "LOCCUSLON": 115.531038000000000000000,
+      "LOCCUSLAT": 30.798802000000000000000,
+      "LOCRSLON": 115.531038000000000000000,
+      "LOCRSLAT": 30.798802000000000000000,
+      "LOCRELON": 115.562428690340000000000,
+      "LOCRELAT": 30.794419079451000000000,
+      "MPEXLASTDATA": "-1"
+    },
+    {
+      "MPID": "2c2b7710-7b95-49a1-b4e1-7e84504aa73b",
+      "MPTYPE": "EmergentEvent",
+      "MPTYPENAME": "突发事件",
+      "HIGHWAY": "G42S",
+      "SECTION": "武英向",
+      "SECTIONID": 1,
+      "PILENORS": "123.400",
+      "PILENORE": "125.600",
+      "MPCODE": "d120ac02-2cb8-45db-9890-387ed19b6bc0",
+      "MPNAME": "凤凰关、濛濛山桥隧群危化品运输事故",
+      "MPTEXT": "从凤凰关隧道-濛濛山隧道发生事故！",
+      "MPEXDATA": "1",
+      "PILENO": "123.500",
+      "LOCWGSLON": null,
+      "LOCWGSLAT": null,
+      "LOCCUSLON": 115.531038000000000000000,
+      "LOCCUSLAT": 30.798802000000000000000,
+      "LOCRSLON": 115.531038000000000000000,
+      "LOCRSLAT": 30.798802000000000000000,
+      "LOCRELON": 115.562428690340000000000,
+      "LOCRELAT": 30.794419079451000000000,
+      "MPEXLASTDATA": "1"
+    },
+    {
+      "MPID": "90cf847e-623d-4e82-a1ea-7e2e32b9c428",
+      "MPTYPE": "EmergentEvent",
+      "MPTYPENAME": "突发事件",
+      "HIGHWAY": "G42S",
+      "SECTION": "武英向",
+      "SECTIONID": 1,
+      "PILENORS": "135.841",
+      "PILENORE": "157.412",
+      "MPCODE": "8628926e-b587-46cf-8f70-69f99329d59c",
+      "MPNAME": "省际收费广场车流量激增突发事件",
+      "MPTEXT": "从英山-大枫树岭隧道发生事故！",
+      "MPEXDATA": "-1",
+      "PILENO": "135.841",
+      "LOCWGSLON": null,
+      "LOCWGSLAT": null,
+      "LOCCUSLON": 115.656612716070000000000,
+      "LOCCUSLAT": 30.765096313171000000000,
+      "LOCRSLON": 115.656612716070000000000,
+      "LOCRSLAT": 30.765096313171000000000,
+      "LOCRELON": 115.857419000000000000000,
+      "LOCRELAT": 30.805789000000000000000,
+      "MPEXLASTDATA": "-1"
+    },
+    {
+      "MPID": "26a42957-8159-4d44-b2fb-3a076e1d846f",
+      "MPTYPE": "EmergentEvent",
+      "MPTYPENAME": "突发事件",
+      "HIGHWAY": "G42S",
+      "SECTION": "武英向",
+      "SECTIONID": 1,
+      "PILENORS": "123.400",
+      "PILENORE": "125.600",
+      "MPCODE": "6346d91c-65a8-49f8-a6cd-140888158ccc",
+      "MPNAME": "凤凰关、濛濛山桥隧群危化品运输事故",
+      "MPTEXT": "从凤凰关隧道-濛濛山隧道发生事故！",
+      "MPEXDATA": "1",
+      "PILENO": "123.500",
+      "LOCWGSLON": null,
+      "LOCWGSLAT": null,
+      "LOCCUSLON": 115.531038000000000000000,
+      "LOCCUSLAT": 30.798802000000000000000,
+      "LOCRSLON": 115.531038000000000000000,
+      "LOCRSLAT": 30.798802000000000000000,
+      "LOCRELON": 115.562428690340000000000,
+      "LOCRELAT": 30.794419079451000000000,
+      "MPEXLASTDATA": "1"
+    },
+    {
+      "MPID": "0d3394aa-50da-470b-a209-6bd69aa90fb9",
+      "MPTYPE": "EmergentEvent",
+      "MPTYPENAME": "突发事件",
+      "HIGHWAY": "G42",
+      "SECTION": "麻武向",
+      "SECTIONID": 1,
+      "PILENORS": "693.100",
+      "PILENORE": "693.100",
+      "MPCODE": "3c9d7f67-4aa4-4c00-ac51-ca4c84d93434",
+      "MPNAME": "恶劣天气",
+      "MPTEXT": "从木子店服务区-木子店服务区发生事故！",
+      "MPEXDATA": "-1",
+      "PILENO": "693.100",
+      "LOCWGSLON": null,
+      "LOCWGSLAT": null,
+      "LOCCUSLON": 115.428317696480000000000,
+      "LOCCUSLAT": 31.246687094198000000000,
+      "LOCRSLON": 115.428317696480000000000,
+      "LOCRSLAT": 31.246687094198000000000,
+      "LOCRELON": 115.428317696480000000000,
+      "LOCRELAT": 31.246687094198000000000,
+      "MPEXLASTDATA": "-1"
+    },
+    {
+      "MPID": "580446df-812c-4a3f-bf5e-a42490d9f2af",
+      "MPTYPE": "EmergentEvent",
+      "MPTYPENAME": "突发事件",
+      "HIGHWAY": "G42",
+      "SECTION": "麻武向",
+      "SECTIONID": 1,
+      "PILENORS": "760.000",
+      "PILENORE": "760.000",
+      "MPCODE": "ab1f7176-dd00-49b7-afab-7845319244d5",
+      "MPNAME": "交通事故",
+      "MPTEXT": "从麻城东互通（收费站）-永佳河互通（收费站）发生事故！",
+      "MPEXDATA": "3",
+      "PILENO": "760.000",
+      "LOCWGSLON": null,
+      "LOCWGSLAT": null,
+      "LOCCUSLON": 114.806849255580000000000,
+      "LOCCUSLAT": 31.112310390047000000000,
+      "LOCRSLON": 114.806849255580000000000,
+      "LOCRSLAT": 31.112310390047000000000,
+      "LOCRELON": 114.806849255580000000000,
+      "LOCRELAT": 31.112310390047000000000,
+      "MPEXLASTDATA": "3"
+    }];
+  
+  
   window._map = map;
+  dates.forEach(s=>{
+    Evens(s,map);
+  });
 }
 
-let poidOverlay = [];
+function Evens(markerPoint,map){
+    var isAnimation=true;
+    var mPoint = new BMap.Point(markerPoint.LOCCUSLON, markerPoint.LOCCUSLAT);
+    if (isAnimation) {
+        var hlRadius = 300;
+        var hlcircle = new BMap.Circle(mPoint, hlRadius, { strokeColor: "#F43C12", strokeWeight: 10, strokeOpacity: 0.8 });
+        map.addOverlay(hlcircle);
+        var hlInterval_index = hlRadius;
+        var hlInterval = setInterval(function () {
+            hlcircle.setRadius(hlInterval_index);
+            hlInterval_index -= 10;
+            if (hlInterval_index < 0) hlInterval_index = hlRadius;
+        }, 50);
+        window.hlInterval = hlInterval;
+    }
+}
 
 function BaiduMap(type) {
   const map = window._map;
-  let point = new BMap.Point(115.200075, 30.669524);
+  let point = new BMap.Point(113.235743,31.281263);
   map.centerAndZoom(point, 10);
   createMarker(map, type);
 }
 
-function createKMPileMarker(map) {
-  removeBMapOverlayMarker(map, "MK");
-  let datas = KMPile;
-  let zoom = map.getZoom();
-  let zoomBL = MP_ZOOMTOSCALE[zoom];
-  if (zoom >= 14) {
-    zoomBL = 1;
-  } else if (zoom < 8) {
-    return;
-  }
-  datas.filter(i => i.HIGHWAY == "G42").forEach((element, index, db) => {
-    if (index == 0 || index == db.length - 1 || element.PILENO % zoomBL == 0) {
-      createPileMarker(element, map);
-    }
-  });
-  datas
-    .filter(i => i.HIGHWAY == "G42S")
-    .sort(function(a, b) {
-      if (a.PILENO < b.PILENO) {
-        return 1;
-      } else {
-        return -1;
-      }
-    })
-    .forEach((element, index, db) => {
-      if (
-        index == 0 ||
-        index == db.length - 1 ||
-        element.PILENO % zoomBL == 0
-      ) {
-        createPileMarker(element, map);
-      }
-    });
-  datas.filter(i => i.HIGHWAY == "G50").forEach((element, index, db) => {
-    if (index == 0 || index == db.length - 1 || element.PILENO % zoomBL == 0) {
-      createPileMarker(element, map);
-    }
-  });
-  datas.filter(i => i.HIGHWAY == "G70").forEach((element, index, db) => {
-    if (index == 0 || index == db.length - 1 || element.PILENO % zoomBL == 0) {
-      createPileMarker(element, map);
-    }
-  });
-}
-
-function createPileMarker(element, map) {
-  let imgurl = window.STATIC_URL + "res/Imgs/bmap_m_kmpile.png";
-  var pt = new BMap.Point(element.LOCCUSLON, element.LOCCUSLAT);
-  var marker = new BMap.Marker(pt, {
-    icon: new BMap.Icon(imgurl, new BMap.Size(33, 32), {
-      anchor: new BMap.Size(2, 16)
-    }),
-    title: element.MPID
-  });
-  var label = new BMap.Label(element.MPNAME, {
-    offset: new BMap.Size(1, 2)
-  });
-  label.setStyle({
-    "background-color": "transparent",
-    color: "#3f3f3f",
-    border: "none",
-    fontSize: "11px",
-    fontFamily: "Arial"
-  });
-  marker.setLabel(label);
-  map.addOverlay(marker);
-  poidOverlay.push({ type: "MK", db: marker });
-}
-
-function createMarker(map, type) {
-  let datas = null;
-  let imgurl = null;
-  removeBMapOverlayMarker(map, "LC");
-  if (type == "收费站/管理所") {
-    datas = Station;
-    imgurl = window.STATIC_URL + "res/Imgs/bmap_m_station.png";
-  } else if (type == "桥梁") {
-    datas = Bridge;
-    imgurl = window.STATIC_URL + "res/Imgs/bmap_m_bridge.png";
-  } else if (type == "隧道") {
-    datas = Tunnel;
-    imgurl = window.STATIC_URL + "res/Imgs/bmap_m_tunnel.png";
-  } else {
-    let datas = null;
-    let imgurl = null;
-  }
-  if (datas != null) {
-    datas.forEach(element => {
-      var pt = new BMap.Point(element.LOCCUSLON, element.LOCCUSLAT);
-      var marker = new BMap.Marker(pt, {
-        icon: new BMap.Icon(imgurl, new BMap.Size(36, 36 * 1.5)),
-        title: element.MPID
-      });
-      var label = new BMap.Label(element.MPNAME, {
-        offset: new BMap.Size(23, -20)
-      });
-      label.setStyle({ backgroundColor: "transparent",color:'#ffffff', border: "none" });
-      marker.setLabel(label);
-      map.addOverlay(marker);
-      poidOverlay.push({ type: "LC", db: marker });
-    });
-  }
-}
-
-function removeBMapOverlayMarker(map, type) {
-  for (var i = 0; i < poidOverlay.length; i++) {
-    var item = poidOverlay[i];
-    if (item.type == type) {
-      map.removeOverlay(item.db);
-    }
-  }
-}
-
-function setBMapHighlight(map) {
-  var drivingRoute = new BMap.DrivingRoute(map, {
-    onSearchComplete: function(results) {
-      if (drivingRoute.getStatus() == BMAP_STATUS_SUCCESS) {
-        var pts = results
-          .getPlan(0)
-          .getRoute(0)
-          .getPath();
-        var polyline = new BMap.Polyline(pts, {
-          strokeColor: "#989898",
-          strokeWeight: 15,
-          strokeOpacity: 0.7,
-          enableMassClear: false
-        });
-        map.addOverlay(polyline);
-      }
-    }
-  });
-
-  //武麻高速
-  var WM_S = new BMap.Point(114.554023, 31.002106);
-  var WM_E = new BMap.Point(115.464186, 31.287435);
-  drivingRoute.search(WM_S, WM_E);
-  //武英高速
-  var WY_S = new BMap.Point(114.598641, 30.782112);
-  var WY_E = new BMap.Point(115.881139, 30.814093);
-  drivingRoute.search(WY_S, WY_E);
-  //黄黄高速
-  var HH_S = new BMap.Point(115.107015, 30.25484);
-  var HH_E = new BMap.Point(116.091958, 30.122612);
-  drivingRoute.search(HH_S, HH_E);
-  //黄小高速
-  var HX_S = new BMap.Point(115.922869, 30.034519);
-  var HX_E = new BMap.Point(115.920574, 29.72895);
-  drivingRoute.search(HX_S, HX_E);
-  //汉十
-  var HS_S = new BMap.Point(114.313529, 30.771434);
-  var HS_E = new BMap.Point(110.09703, 33.222924);
-  drivingRoute.search(HS_S, HS_E);
-  map.addOverlay(drivingRoute);
-}
 function setBMapBoundary(map) {
   var bdary = new BMap.Boundary();
   bdary.get("湖北省", function(rshb) {
