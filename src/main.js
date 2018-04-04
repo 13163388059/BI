@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 import Vue from 'vue'
 import CSS_RESET from './css/reset.css'
 import ICON from './css/iconfont/iconfont.css'
@@ -5,6 +7,7 @@ import App from './components/main/App.vue'
 import router from './router'
 import store from './store'
 import echarts from 'echarts'
+import ajax from './utils/ajax'
 import {
   // Pagination,
   // Dialog,
@@ -100,5 +103,5 @@ new Vue({
 
 
 //window.STATIC_URL = 'http://ecs.whwckj.com:1001/'
-
+window.ajax = ajax
 window.STATIC_URL = 'http://localhost:'+ require('../server/server.config').port +'/'

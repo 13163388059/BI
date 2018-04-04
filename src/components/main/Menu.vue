@@ -1,6 +1,7 @@
 <template lang="html">
 	<div class="mask_menu" ref='mask' :style="{opacity: isShow?1:0,transitionDelay:isShow?'0.1s':'0s'}">
 		<div class="mask_menu__container" ref="menu">
+			<div style='height:50%'></div>
 			<div v-for='(item,index) in menu' class="mask_menu__item" :style="{width:150*width+'px',height:120*height+'px'}">
 				<div class="mask_menu__title" :style='{height:titleHeight+"px",lineHeight:titleHeight+"px",top:-1*titleHeight+"px"}'>{{item.title}}</div>
 
@@ -162,6 +163,7 @@
 		overflow-y: hidden;
 		padding: 0 96px 0 48px;
 		white-space: nowrap;
+		position: relative;
 	}
 
 	.mask_menu__item {
@@ -169,8 +171,8 @@
 		height: 720px;
 		display: inline-block;
 		position: relative;
-		top: 50%!important;
-		transform: translate(0, -50%);
+		/* top: 50%!important; */
+		transform: translate(0, -50%)!important;
 		margin-left: 48px;
 	}
 	/* .mask_menu__item:first-child {
