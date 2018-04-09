@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     handleNodeClick(data, node) {
-      console.log(data)
       this.$refs.tree.setCheckedNodes([]);
       this.$refs.tree.setCheckedNodes([data]);
       if (data.able)
@@ -66,7 +65,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store.state.router.choose)
   }
 };
 </script>

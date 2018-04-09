@@ -26,7 +26,6 @@ export default {
     mounted(){
         const _this = this
         setInterval(()=>{
-            console.log(111)
             _this.msg.push(_this.msg.shift())
         },3000)
     }

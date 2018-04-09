@@ -36,7 +36,6 @@
 			},
 			blockClick(e){
 				const domSet = e.target.dataset
-				console.log(domSet)
 				this.$store.commit('router/choose',{row:domSet.row,col:domSet.col})
 				this.$emit('closeMenu')
 			}

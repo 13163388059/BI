@@ -30,7 +30,6 @@ export default {
         },
 
         blockClass(){
-            console.log(this.color)
             if (!this.color) return 'block'
 
             return 'block color color'+this.color
