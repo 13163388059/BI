@@ -16,7 +16,7 @@ const polling = function name(
             return setTimeout(sendAjax, timeout);
 
         msgs.forEach(i => {
-            ajax[method](i.path, '', i.sys)
+            ajax[i.method](i.path, i.data, i.sys)
                 .then(data => {
                     pub(callbacks, data, i)
                 })
@@ -42,7 +42,7 @@ const polling = function name(
     sendAjax()
 
     return {
-        on(path, sys, callback) {
+        on(path, sys, callback,method) {
             const id = uuidv4()
 
             callbacks.push({
@@ -51,8 +51,7 @@ const polling = function name(
                 callback,
                 id,
             })
-
-            ajax[method](path, '', sys)
+            ajax[method?method:'post'](path, '', sys)
                 .then(data => {
                     callback(data)
                 })
@@ -61,7 +60,7 @@ const polling = function name(
 
             return id
         },
-        sub(path, sys = 'def') {
+        sub(path, sys = 'def',method = 'post',data) {
             // 判断是否已经存在于 msgs
 
             if (!name ||
@@ -69,7 +68,7 @@ const polling = function name(
             )
                 return this
 
-            msgs.push({ sys, path })
+            msgs.push({ sys, path,data ,method})
 
             return this
         },

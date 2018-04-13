@@ -21,7 +21,11 @@ const
     system = {
       roadproperty:'WCKJAPI_RoadProperty/',
       operation:'WCKJAPI_Operation/',
+      emergency:'WCKJAPI_Emergency/',
       def:'WCKJAPI_MD/',
+      securityrisk:'WCKJAPI_SecurityRisk/',
+      finance:'WCKJAPI_Finance/',
+      assets:'WCKJAPI_Assets/'
     }
 
 

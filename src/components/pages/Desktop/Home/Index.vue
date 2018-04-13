@@ -70,8 +70,7 @@
                 <div class='count--title' >日收费额</div>
               </div>
               <div class='count--outer value'>
-                <div class='count--value'>ETC: {{topData.RSFE.ETC}} 元<br>
-MTC: {{topData.RSFE.MTC}} 元</div>
+                <div class='count--value'>ETC: {{topData.RSFE.ETC}} 元<br>MTC: {{topData.RSFE.MTC}} 元</div>
               </div>
             </div>
             <div class = 'container' style="width:50%;height:100%;padding:16px 0">
@@ -205,48 +204,29 @@ export default {
       ],
       activeName: '黄黄路段',
       tabData: tabData,
-      tableData: [
-        {
-          name: '大枫树岭隧道交道事故',//事件名称
-          date: '2018-3-21 9:55',//发生时间
-          zh: 'K678+900',//桩号
-          state: '接警上报'//处置状态
-        }, {
-          name: '隧道交通事故',
-          date: '2018-3-20 9:54',
-          zh: 'K58+543',
-          state: '先期处置'
-        }, {
-          name: '危化品运输事故',
-          date: '2018-3-20 9:44',
-          zh: 'K58+543',
-          state: '事件定级'
-        }, {
-          name: '隧道停电',
-          date: '2018-3-18 9:40',
-          zh: 'K27+463',
-          state: '处置确认'
-        }, {
-          name: '交通事故',
-          date: '2018-3-10 8:20',
-          zh: 'K693+55',
-          state: '实施预案'
-        }, {
-          name: '养护施工',
-          date: '2018-3-9 10:50',
-          zh: 'K70+82',
-          state: '处置确认'
-        }, {
-          name: '主线恶意堵道',
-          date: '2018-3-9 10:42',
-          zh: 'K78+12',
-          state: '接警上报'
-        }],
+      tableData: [],
 
     };
   },
   mounted() {
     const _this = this
+
+
+    glob.polling
+      .sub('GetAssetsRemnant', 'assets')
+      .on('GetAssetsRemnant', 'assets', ({ data }) => {
+        if (typeof data == 'string') data = JSON.parse(data)
+        console.log(data)
+        _this.topData.ZCCY = { JZ: (data.Price/10000).toString().split('.')[0], BL: data.Residualrate.split('%')[0] }
+      })
+
+    glob.polling
+      .sub('GetFinceZx', 'finance', 'get')
+      .on('GetFinceZx', 'finance', ({ data }) => {
+        if (!data) return;
+        _this.topData.NDYS = { ZC: data.ZFAMOUNT, FZC: data.NPAMOUNT }
+
+        _this.topData.YSZX = { ZXL: data.ZFAMOUNT1, ZZ: data.NPAMOUNT1 }      }, 'get')
 
     glob.polling
       .sub('GetNDLZWFSJ', 'roadproperty')
@@ -255,7 +235,6 @@ export default {
     glob.polling
       .sub('GetNDYHJH', 'roadproperty')
       .on('GetNDYHJH', 'roadproperty', ({ data }) => {
-        console.log(data)
         _this.topData.NDYH = { G: data.ZBSum, WZX: data.ZBWZX }      })
 
     glob.polling
@@ -263,9 +242,35 @@ export default {
       .on('GeRSFE', 'operation', ({ data }) => { _this.topData.RSFE = { ETC: data.ETC, MTC: data.MTC } })
 
     glob.polling
+      .sub('GetAssetCount', 'assets')
+      .on('GetAssetCount', 'assets', ({ data }) => {
+        if (typeof data == 'string') data = JSON.parse(data)
+        _this.topData.GDZZ = { BF: data.BFCount, ZS: data.TCount }      })
+
+
+
+    glob.polling
+      .sub('GetYearCheck', 'securityrisk')
+      .on('GetYearCheck', 'securityrisk', ({ data }) => {
+        const temp = data.reduce((res, i) => (res[i.title] = i.total, res), {})
+        _this.topData.AQYH = { LJ: temp['累计'], YCL: temp['已处理'] }
+      })
+
+    glob.polling
       .sub('GeRLL', 'operation')
       .on('GeRLL', 'operation', ({ data }) => { _this.topData.RLL = { RK: data.RK, CK: data.CK } })
 
+    glob.polling
+      .sub('GetEmergencyListByBI', 'emergency')
+      .on('GetEmergencyListByBI', 'emergency', ({ data }) => {
+        _this.topData.TFSJ = { LJ: data[0].TotalEvent, YCZ: data[0].TotalSetEvent }
+
+        _this.tableData = data.map(i => ({
+          name: i.TITILE,
+          date: i.CDATE,
+          zh: i.PILENO,
+          state: i.SUBHEAD
+        }))      })
 
     glob.polling
       .sub('GeLLLB', 'operation')
@@ -281,9 +286,7 @@ export default {
           }))
         }))
 
-        console.log(data)
-        console.log(_data)
-        _this.tabData =  _data    })
+        _this.tabData = _data      })
   },
   computed: {
     renderTab() {
@@ -291,7 +294,7 @@ export default {
         tab_data = _this.tabData.map((v) => (v.id == _this.activeName ? v.items : null))
           .filter(v => v)[0]
 
-      if(tab_data) return tab_data
+      if (tab_data) return tab_data
       else _this.tabData[0]
     }
   },

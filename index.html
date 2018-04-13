@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>bi2</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="app"></div>
+    <script>
+        window.globConfig = {
+            ajax_origin: {
+                prod: 'http://139.129.237.60:1102/',
+                dev: 'http://127.0.0.1:1102/'
+            },
+            
+            static_origin: {
+                prod: 'http://139.129.237.60:1102/',
+                dev: 'http://127.0.0.1:1102/'
+            },
+            envirnment:'dev'
+        }
+    </script>
     <script src="./dist/build.js"></script>
-  </body>
+</body>
+
 </html>
