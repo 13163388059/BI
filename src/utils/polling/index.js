@@ -77,9 +77,8 @@ const polling = function name(
 
             if (call) {
                 callbacks = callbacks.map(i => i.id === id ? null : i).filter(i => i)
-                if (callbacks.filter(i => i.path == call.path && i.sys == call.sys).length == 0)
+                if (callbacks.filter(i =>( i.path == call.path )&&( i.sys == call.sys)).length == 0)
                     msgs = msgs.map(i => i.path == call.path && i.sys == call.sys ? null : i).filter(i => i)
-
             }
         }
     }

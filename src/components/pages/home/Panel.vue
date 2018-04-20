@@ -126,7 +126,6 @@ export default {
             else this.states.now = 'default'
         },
         console() {
-            console.log(this.type)
         }
     }
 

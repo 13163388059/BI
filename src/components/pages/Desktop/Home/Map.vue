@@ -18,6 +18,8 @@ let
   layout_securityrisk = [],
   baidu_map = null
 
+const polling = []
+
 export default {
   name: "bi-map",
   data() {
@@ -53,28 +55,31 @@ export default {
     else loadBaiduMap(this.$refs.map);
     const _this = this
 
-    glob.polling
+    polling.push(glob.polling
       .sub('GIS_GetMarkerPointByBI', 'emergency')
       .on('GIS_GetMarkerPointByBI', 'emergency', ({ data }) => {
         clearMap(baidu_map)
         data.forEach(i => {
           Evens(i, baidu_map, _this.label_map[i.MPEXDATA])
         })
-      })
+      }))
 
-    glob.polling
+    polling.push(glob.polling
       .sub('GetRiskMap', 'securityrisk')
       .on('GetRiskMap', 'securityrisk', ({ data }) => {
         clearMap(baidu_map,true)
         data.forEach(i => {
           Evens(i, baidu_map, _this.label_map[i.MPEXDATA],true)
         })
-      })
+      }))
   },
   beforeDestroy() {
     this.$store.commit("charts/clean");
     if (baidu_map)
-      clearMap(baidu_map)
+      clearMap(baidu_map);
+    polling.forEach(i=>{
+      glob.polling.cancel(i)
+    })
   }
 };
 

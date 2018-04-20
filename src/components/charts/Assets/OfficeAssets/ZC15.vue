@@ -8,6 +8,8 @@ import installTheme from "../../theme";
 
 installTheme({}, echarts);
 
+const polling = []
+
 export default {
   name: "page-test",
   data() {
@@ -20,17 +22,22 @@ export default {
 
     ;
 
-    glob.polling
+    polling.push(glob.polling
       .sub('GetAssetTypeCount', 'assets')
       .on('GetAssetTypeCount', 'assets', ({ data }) => {
         if(typeof data == 'string') data = JSON.parse(data)
 
         init(myChart,data)
-      })
+      }))
 
 
 
     _this.$store.commit("charts/push", myChart);
+  },
+  beforeDestroy(){
+    polling.forEach(i=>{
+      glob.polling.cancel(i)
+    })
   }
 };
 

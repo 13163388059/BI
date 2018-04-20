@@ -15,6 +15,8 @@ const
         dev: 'http://127.0.0.1:1102/'
     }
 
+    console.log(window.globConfig.ajax_origin)
+
 ajax.get = (path = '', data, sys = 'def', option = {}) => (
 
     new Promise((res, rej) => {

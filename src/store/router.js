@@ -11,7 +11,7 @@ export default {
     choose:menu.children[0].children[0]
   },
   mutations: {
-    choose(state,{row,col}) {s
+    choose(state,{row,col}) {
 
       if(state.all[row] && state.all[row].children && state.all[row].children[col])
         state.choose = state.all[row].children[col]

@@ -173,7 +173,7 @@ import Msg from './Msg.vue'
 import tabData from './tabData'
 import BMap from './Map.vue'
 
-
+const dispatch_polling = []
 
 export default {
   components: {
@@ -212,55 +212,54 @@ export default {
     const _this = this
 
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GetAssetsRemnant', 'assets')
       .on('GetAssetsRemnant', 'assets', ({ data }) => {
         if (typeof data == 'string') data = JSON.parse(data)
-        console.log(data)
-        _this.topData.ZCCY = { JZ: (data.Price/10000).toString().split('.')[0], BL: data.Residualrate.split('%')[0] }
-      })
+        _this.topData.ZCCY = { JZ: (data.Price / 10000).toString().split('.')[0], BL: data.Residualrate.split('%')[0] }
+      }))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GetFinceZx', 'finance', 'get')
       .on('GetFinceZx', 'finance', ({ data }) => {
         if (!data) return;
         _this.topData.NDYS = { ZC: data.ZFAMOUNT, FZC: data.NPAMOUNT }
 
-        _this.topData.YSZX = { ZXL: data.ZFAMOUNT1, ZZ: data.NPAMOUNT1 }      }, 'get')
+        _this.topData.YSZX = { ZXL: data.ZFAMOUNT1, ZZ: data.NPAMOUNT1 }      }, 'get'))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GetNDLZWFSJ', 'roadproperty')
-      .on('GetNDLZWFSJ', 'roadproperty', ({ data }) => { _this.topData.WFSJ = { G: data.SJSum, WCL: data.WCL } })
+      .on('GetNDLZWFSJ', 'roadproperty', ({ data }) => { _this.topData.WFSJ = { G: data.SJSum, WCL: data.WCL } }))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GetNDYHJH', 'roadproperty')
       .on('GetNDYHJH', 'roadproperty', ({ data }) => {
-        _this.topData.NDYH = { G: data.ZBSum, WZX: data.ZBWZX }      })
+        _this.topData.NDYH = { G: data.ZBSum, WZX: data.ZBWZX }      }))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GeRSFE', 'operation')
-      .on('GeRSFE', 'operation', ({ data }) => { _this.topData.RSFE = { ETC: data.ETC, MTC: data.MTC } })
+      .on('GeRSFE', 'operation', ({ data }) => { _this.topData.RSFE = { ETC: data.ETC, MTC: data.MTC } }))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GetAssetCount', 'assets')
       .on('GetAssetCount', 'assets', ({ data }) => {
         if (typeof data == 'string') data = JSON.parse(data)
-        _this.topData.GDZZ = { BF: data.BFCount, ZS: data.TCount }      })
+        _this.topData.GDZZ = { BF: data.BFCount, ZS: data.TCount }      }))
 
 
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GetYearCheck', 'securityrisk')
       .on('GetYearCheck', 'securityrisk', ({ data }) => {
         const temp = data.reduce((res, i) => (res[i.title] = i.total, res), {})
         _this.topData.AQYH = { LJ: temp['累计'], YCL: temp['已处理'] }
-      })
+      }))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GeRLL', 'operation')
-      .on('GeRLL', 'operation', ({ data }) => { _this.topData.RLL = { RK: data.RK, CK: data.CK } })
+      .on('GeRLL', 'operation', ({ data }) => { _this.topData.RLL = { RK: data.RK, CK: data.CK } }))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GetEmergencyListByBI', 'emergency')
       .on('GetEmergencyListByBI', 'emergency', ({ data }) => {
         _this.topData.TFSJ = { LJ: data[0].TotalEvent, YCZ: data[0].TotalSetEvent }
@@ -270,9 +269,9 @@ export default {
           date: i.CDATE,
           zh: i.PILENO,
           state: i.SUBHEAD
-        }))      })
+        }))      }))
 
-    glob.polling
+    dispatch_polling.push(glob.polling
       .sub('GeLLLB', 'operation')
       .on('GeLLLB', 'operation', ({ data }) => {
         const _data = data.map(i => ({
@@ -286,7 +285,7 @@ export default {
           }))
         }))
 
-        _this.tabData = _data      })
+        _this.tabData = _data      }))
   },
   computed: {
     renderTab() {
@@ -300,8 +299,13 @@ export default {
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event);
     }
+  },
+  beforeDestroy() {
+    dispatch_polling.forEach(i => {
+      glob.polling.cancel(i)
+    })
+
   }
 }
 </script>
