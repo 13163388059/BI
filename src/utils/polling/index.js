@@ -2,7 +2,7 @@ import ajax from '../ajax'
 import uuidv4 from 'uuid/v4';
 
 const polling = function name(
-    timeout = 1000 * 10, //间隔时间
+    timeout = 1000 * 60, //间隔时间
     method = 'post', //方法
 ) {
 
